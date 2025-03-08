@@ -1,0 +1,33 @@
+:root {
+  --ng-red: #dd3300;
+}
+
+  /* NEW */
+.ng-logo-footer {
+  margin-left: 20px;
+  align-items: center;
+  background-color: var(--ng-red);
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  /* z-index: 99; */
+}
+
+.footer-container {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  height: 60px;
+  background-color: var(--ng-red);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 0rem;
+  bottom: 0px;
+  font-family: 'Cavier Dreams Bold';
+  font-size: 14px;
+  padding-bottom:22px; /*removes small gap underneath footer*/
+}

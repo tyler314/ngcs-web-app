@@ -1,0 +1,149 @@
+:root {
+  --ng-red: #dd3300;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: 'MicroFLF';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/src/fonts/microflf-bold.ttf') format('truetype'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+/* NEW */
+.header {
+  height: 80px;
+  background-color: #FFFFFF;
+  display: flex;
+  padding: 0.5rem 0rem;
+  /* position:sticky; */
+  /* top:10px; */
+  width: 100%;
+  padding-top: 40px;
+  /* z-index: 99; */
+}
+
+.banner {
+  height: 15px;
+  background-color: var(--ng-red);
+  display: flex;
+  padding: 0.5rem 0rem;
+  position: fixed;
+  /* top:0; */
+  width: 100%;
+  /* padding-top: 15px; */
+  z-index: 99;
+}
+
+.ng-logo-header {
+  margin-left: 20px;
+  align-items: center;
+  background-color: #FFFFFF;
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  /* z-index: 99; */
+}
+
+/*  DESKTOP */
+.desktop-tab {
+  color: #000000;
+  font-size: 20px;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.desktop-tab-with-box {
+  color: #FFFFFF;
+  border: 5px solid var(--ng-red);
+  background-color: var(--ng-red);
+  padding: 12px;
+  border-radius: 3px;
+  font-size: 20px;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.desktop-header {
+  display: flex;
+}
+
+.desktop-header ul {
+  display: flex;
+  list-style: none;
+  list-style-type: none;
+  align-items: center;
+  font-family: 'MicroFLF';
+  list-style: none;
+  white-space: nowrap;
+}
+
+.desktop-header ul li {
+  margin-right: 80px;
+}
+
+.desktop-header ul li:last-child {
+  margin-right: 20px;
+}
+
+@media (max-width: 999px) {
+  .desktop-header {
+    display: none;
+  }
+}
+
+/* MOBILE */
+.mobile-header {
+  display: flex;
+}
+
+.mobile-header ul {
+  display: flex;
+  list-style: none;
+  list-style-type: none;
+  align-items: center;
+  font-family: 'MicroFLF';
+  list-style: none;
+  white-space: nowrap;
+}
+
+.mobile-header ul li:first-child {
+  margin-right: 50px;
+}
+
+.mobile-header ul li:last-child {
+  margin-right: 10px;
+}
+
+  .mobile-tab {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    list-style-type: none;
+    align-items: center;
+  }
+
+  .mobile-tab a {
+    font-weight: 400;
+    color: #000000;
+    text-decoration: none;
+    font-family: 'MicroFLF';
+    font-size: 24px;
+  }
+
+  .mobile-tab a:hover {
+    color: #70766A;
+  }
+  .mobile-tab a:active {
+    color: #c97946;
+  }
+  
+  .hamburger-drop-down {
+    margin-right: 20px;
+  }
+
+  @media (min-width: 1000px) {
+    .mobile-header {
+      display: none;
+    }
+  }
