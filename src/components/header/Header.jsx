@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom';
 import './Header.css'
 import { Menu, MenuItem, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 
 
 function NGLogo() {
@@ -24,10 +27,38 @@ function NGLogo() {
   )
 }
 // DESKTOP
-function Banner(props) {
-  return (
-    <div>
+function BannerSocialComponent() {
+    return (
+        <div className='banner-social'>
+            <NavLink to="https://www.facebook.com/profile.php?id=100057586954258" exact className="banner-nav-link">
+                <FacebookOutlinedIcon/>
+            </NavLink>
+            <NavLink to="https://www.instagram.com/neutralgroundcombatsports/" exact className="banner-nav-link">
+                <InstagramIcon/>
+            </NavLink>
+            <a href={'mailto:info@westbendbjj.com'} className="banner-nav-link">
+                <EmailOutlinedIcon/>
+            </a>
+        </div>
+    )
+}
 
+function WaiverLinkComponent() {
+    return (
+        <div className='banner-waiver'>
+            <NavLink
+                to="https://ngwb-public-forms.s3.us-east-2.amazonaws.com/GymWaiver.pdf" exact
+                className='banner-nav-link'>
+                Click Here to Sign Our Waiver
+            </NavLink>
+        </div>
+    )
+}
+function Banner() {
+  return (
+    <div className="banner-content">
+        <WaiverLinkComponent/>
+        <BannerSocialComponent/>
     </div>
   )
 }

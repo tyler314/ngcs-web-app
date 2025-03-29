@@ -10,29 +10,53 @@
   src: url('/src/fonts/microflf-bold.ttf') format('truetype'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-/* NEW */
 .header {
   height: 80px;
   background-color: #FFFFFF;
   display: flex;
-  padding: 0.5rem 0rem;
-  /* position:sticky; */
-  /* top:10px; */
   width: 100%;
-  padding-top: 40px;
-  /* z-index: 99; */
+  padding: 40px 0 0.5rem;
 }
 
 .banner {
   height: 15px;
   background-color: var(--ng-red);
-  display: flex;
-  padding: 0.5rem 0rem;
+  padding: 0.5rem 0;
   position: fixed;
-  /* top:0; */
   width: 100%;
-  /* padding-top: 15px; */
   z-index: 99;
+}
+
+.banner-nav-link {
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'MicroFLF', serif;
+  margin-right: 10px;
+}
+
+.banner-nav-link:hover {
+  text-decoration: underline;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -5px;
+}
+
+.banner-social {
+  margin-left: auto;
+  display: flex;
+}
+
+.banner-waiver {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-left: 87px;
 }
 
 .ng-logo-header {
@@ -42,7 +66,6 @@
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  /* z-index: 99; */
 }
 
 /*  DESKTOP */
@@ -71,10 +94,8 @@
 .desktop-header ul {
   display: flex;
   list-style: none;
-  list-style-type: none;
   align-items: center;
-  font-family: 'MicroFLF';
-  list-style: none;
+  font-family: 'MicroFLF', serif;
   white-space: nowrap;
 }
 
@@ -100,10 +121,8 @@
 .mobile-header ul {
   display: flex;
   list-style: none;
-  list-style-type: none;
   align-items: center;
-  font-family: 'MicroFLF';
-  list-style: none;
+  font-family: 'MicroFLF', serif;
   white-space: nowrap;
 }
 
@@ -118,8 +137,7 @@
   .mobile-tab {
     display: flex;
     justify-content: space-between;
-    list-style: none;
-    list-style-type: none;
+    list-style: none none;
     align-items: center;
   }
 
@@ -127,7 +145,7 @@
     font-weight: 400;
     color: #000000;
     text-decoration: none;
-    font-family: 'MicroFLF';
+    font-family: 'MicroFLF', serif;
     font-size: 24px;
   }
 
