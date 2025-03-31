@@ -33,6 +33,7 @@
   font-size: 16px;
   font-family: 'MicroFLF', serif;
   margin-right: 10px;
+  white-space: nowrap;
 }
 
 .banner-nav-link:hover {
@@ -57,6 +58,12 @@
   justify-content: center;
   width: 100%;
   margin-left: 87px;
+}
+
+@media (max-width: 650px) {
+  .phone-number {
+    display: none;
+  }
 }
 
 .ng-logo-header {

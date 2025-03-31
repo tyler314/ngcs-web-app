@@ -2,11 +2,13 @@ import { motion } from "motion/react"
 import React, {useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.css'
-import { Menu, MenuItem, IconButton } from '@mui/material';
+import {Menu, MenuItem, IconButton} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
+import Stack from "@mui/material/Stack";
 
 
 function NGLogo() {
@@ -39,6 +41,11 @@ function BannerSocialComponent() {
             <a href={'mailto:info@westbendbjj.com'} className="banner-nav-link">
                 <EmailOutlinedIcon/>
             </a>
+            <div className="banner-nav-link">|</div>
+            <Stack direction="row" spacing={1} alignItems="center" className="banner-nav-link">
+                <PhoneOutlinedIcon/>
+                <div className='phone-number'>262-335-8020</div>
+            </Stack>
         </div>
     )
 }
