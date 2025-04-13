@@ -204,6 +204,7 @@ export default function Header() {
           <MobileHeader/>
           <DesktopHeader/>
       </div>
+        <div className="lower-banner"/>
     </nav>
 )
 }

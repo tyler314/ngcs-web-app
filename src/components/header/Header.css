@@ -1,5 +1,6 @@
 :root {
   --ng-red: #dd3300;
+  --off-white: #FAF9F6;
 }
 
 @font-face {
@@ -12,7 +13,7 @@
 
 .header {
   height: 80px;
-  background-color: #FFFFFF;
+  background-color: var(--off-white);
   display: flex;
   width: 100%;
   padding: 40px 0 0.5rem;
@@ -60,6 +61,15 @@
   margin-left: 87px;
 }
 
+.lower-banner {
+  background-color: var(--ng-red);
+  padding: 0.5rem 0;
+  height: 1px;
+  background-color: var(--ng-red);
+  transform: scaleY(0.5); /* Visually appears thinner */
+  transform-origin: top;
+}
+
 @media (max-width: 650px) {
   .phone-number {
     display: none;
@@ -69,7 +79,7 @@
 .ng-logo-header {
   margin-left: 20px;
   align-items: center;
-  background-color: #FFFFFF;
+  background-color: var(--off-white);
   display: flex;
   justify-content: flex-start;
   width: 100%;
