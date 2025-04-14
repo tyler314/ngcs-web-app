@@ -1,15 +1,26 @@
 :root {
   --ng-red: #dd3300;
+  --white: #ffffff;
+  --inverted-ng-red: #22ccff;
+}
+
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'MicroFLF';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/src/fonts/microflf.ttf') format('ttf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
   /* NEW */
 .ng-logo-footer {
   margin-left: 20px;
   align-items: center;
-  background-color: var(--ng-red);
+  /*background-color: var(--ng-red);*/
   display: flex;
   justify-content: flex-start;
   width: 100%;
+  filter: invert(1);
   /* z-index: 99; */
 }
 
@@ -19,15 +30,125 @@
   align-items: center;
 }
 
+.footer-nav-link {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'MicroFLF', serif;
+  white-space: nowrap;
+}
+
+.footer-address {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'MicroFLF', serif;
+  white-space: nowrap;
+}
+
+.footer-address:hover {
+  text-decoration: underline;
+}
+
+.footer-address-mobile {
+  white-space: normal;    /* allow wrapping */
+  word-break: break-word; /* break long chunks if needed */
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'MicroFLF', serif;
+  text-align: left;
+}
+
+.footer-phone-number {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 16px;
+  font-family: 'MicroFLF', serif;
+  white-space: nowrap;
+}
+
+.footer-phone-number:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 650px) {
+  .footer-phone-number {
+    display: none;
+  }
+}
+
 .footer {
-  height: 60px;
+  height: 250px;
   background-color: var(--ng-red);
   width: 100%;
   display: flex;
   align-items: center;
   padding: 1.5rem 0rem;
   bottom: 0px;
-  font-family: 'Cavier Dreams Bold';
   font-size: 14px;
-  padding-bottom:22px; /*removes small gap underneath footer*/
+  padding-bottom: 22px; /*removes small gap underneath footer*/
+}
+
+.footer-nav-stack {
+  color: var(--white);
+  font-size: 20px;
+  text-decoration: none;
+  font-family: 'MicroFLF', serif;
+  overflow: hidden;
+}
+
+.footer-outer-stack-desktop {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  gap: 160px;
+  margin: 0 auto;
+}
+
+.footer-outer-stack-mobile {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+  gap: 80px;
+  padding: 16px 0;
+  margin: 0 auto;
+}
+
+.footer-inner-stack {
+  gap: 80px;
+}
+
+@media (max-width: 899px) {
+  .footer-inner-stack {
+    gap: 40px;
+  }
+  .footer-address {
+    display: none;
+  }
+
+  .footer-outer-stack-desktop {
+    display: none;
+  }
+
+  .footer-outer-stack-mobile {
+    gap: 40px;
+  }
+}
+@media (min-width: 899px) {
+  .footer-address-mobile {
+    display: none;
+  }
+
+  .footer-outer-stack-mobile {
+    display: none;
+  }
+
+  .footer-outer-stack-mobile {
+    gap: 40px;
+  }
+}
+
+.left-align {
+  text-align: left;
 }

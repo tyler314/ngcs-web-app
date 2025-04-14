@@ -1,0 +1,30 @@
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'MicroFLF';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/src/fonts/microflf.ttf') format('ttf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+.social-nav-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'MicroFLF', serif;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.social-nav-link:hover {
+    text-decoration: underline;
+}
+
+.header-phone-number {
+    font-family: 'MicroFLF', serif;
+}
+
+@media (max-width: 650px) {
+    .header-phone-number {
+        display: none;
+    }
+}

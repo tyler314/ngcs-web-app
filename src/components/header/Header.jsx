@@ -4,11 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './Header.css'
 import {Menu, MenuItem, IconButton} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
-import Stack from "@mui/material/Stack";
+import { Socials, PhoneContact } from "../../common/commonUtils";
 
 
 function NGLogo() {
@@ -28,24 +24,17 @@ function NGLogo() {
     </div>
   )
 }
+
 // DESKTOP
 function BannerSocialComponent() {
     return (
         <div className='banner-social'>
-            <NavLink to="https://www.facebook.com/profile.php?id=100057586954258" exact className="banner-nav-link">
-                <FacebookOutlinedIcon/>
-            </NavLink>
-            <NavLink to="https://www.instagram.com/neutralgroundcombatsports/" exact className="banner-nav-link">
-                <InstagramIcon/>
-            </NavLink>
-            <a href={'mailto:info@westbendbjj.com'} className="banner-nav-link">
-                <EmailOutlinedIcon/>
-            </a>
+            <Socials
+                className="header-social-stack"
+            />
             <div className="banner-nav-link">|</div>
-            <Stack direction="row" spacing={1} alignItems="center" className="banner-nav-link">
-                <PhoneOutlinedIcon/>
-                <div className='phone-number'>262-335-8020</div>
-            </Stack>
+            <PhoneContact displayPhoneNumber={true} className='phone-contact-desktop' />
+            <PhoneContact displayPhoneNumber={false} className='phone-contact-mobile' />
         </div>
     )
 }

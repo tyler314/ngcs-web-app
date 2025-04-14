@@ -5,7 +5,7 @@
 
 @font-face {
   font-display: swap;
-  font-family: 'MicroFLF';
+  font-family: 'MicroFLF-Bold';
   font-style: normal;
   font-weight: 400;
   src: url('/src/fonts/microflf-bold.ttf') format('truetype'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
@@ -32,7 +32,7 @@
   color: #FFFFFF;
   text-decoration: none;
   font-size: 16px;
-  font-family: 'MicroFLF', serif;
+  font-family: 'MicroFLF-Bold', serif;
   margin-right: 10px;
   white-space: nowrap;
 }
@@ -53,6 +53,10 @@
   display: flex;
 }
 
+.header-social-stack {
+  margin-right: 10px;
+}
+
 .banner-waiver {
   display: flex;
   align-items: center;
@@ -68,12 +72,6 @@
   background-color: var(--ng-red);
   transform: scaleY(0.5); /* Visually appears thinner */
   transform-origin: top;
-}
-
-@media (max-width: 650px) {
-  .phone-number {
-    display: none;
-  }
 }
 
 .ng-logo-header {
@@ -112,7 +110,7 @@
   display: flex;
   list-style: none;
   align-items: center;
-  font-family: 'MicroFLF', serif;
+  font-family: 'MicroFLF-Bold', serif;
   white-space: nowrap;
 }
 
@@ -139,7 +137,7 @@
   display: flex;
   list-style: none;
   align-items: center;
-  font-family: 'MicroFLF', serif;
+  font-family: 'MicroFLF-Bold', serif;
   white-space: nowrap;
 }
 
@@ -162,7 +160,7 @@
     font-weight: 400;
     color: #000000;
     text-decoration: none;
-    font-family: 'MicroFLF', serif;
+    font-family: 'MicroFLF-Bold', serif;
     font-size: 24px;
   }
 
@@ -182,3 +180,16 @@
       display: none;
     }
   }
+
+/* Hide the mobile version on screens 651px and up */
+@media (min-width: 651px) {
+  .phone-contact-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .phone-contact-desktop {
+    display: none;
+  }
+}
