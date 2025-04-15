@@ -22,6 +22,10 @@
 .header-phone-number {
     font-family: 'MicroFLF', serif;
 }
+a[href^="tel"] {
+    text-decoration: none;
+    color: inherit;
+}
 
 @media (max-width: 650px) {
     .header-phone-number {

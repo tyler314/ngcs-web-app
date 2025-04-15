@@ -13,6 +13,7 @@
     "bootstrap": "^5.2.3",
     "mdb-react-ui-kit": "^5.1.0",
     "mdb-ui-kit": "^6.1.0",
+    "motion": "^12.7.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",

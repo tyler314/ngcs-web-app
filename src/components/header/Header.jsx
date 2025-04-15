@@ -127,7 +127,7 @@ function MobileHeader() {
 function MobileTitle() {
   return (
       <div className="mobile-title"> 
-          Neutral Ground West Bend
+          Neutral Ground Combat Sports
       </div>
   )
 }

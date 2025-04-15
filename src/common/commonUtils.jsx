@@ -26,15 +26,17 @@ function Socials(props) {
 function PhoneContact({ displayPhoneNumber = true, className }) {
     return (
         <div className={className}>
-            <Stack direction="row" spacing={1} alignItems="center" className="social-nav-link">
-                <PhoneOutlinedIcon/>
-                <div
-                    className='header-phone-number'
-                    style={{ display: displayPhoneNumber ? "block" : "none" }}
-                >
-                    262-335-8020
-                </div>
-            </Stack>
+            <a href={`tel:2623358020`}>
+                <Stack direction="row" spacing={1} alignItems="center" className="social-nav-link">
+                        <PhoneOutlinedIcon/>
+                    <div
+                        className='header-phone-number'
+                        style={{ display: displayPhoneNumber ? "block" : "none" }}
+                    >
+                        262-335-8020
+                    </div>
+                </Stack>
+            </a>
         </div>
     )
 }

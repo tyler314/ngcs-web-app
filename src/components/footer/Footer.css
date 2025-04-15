@@ -36,6 +36,7 @@
   font-size: 16px;
   font-family: 'MicroFLF', serif;
   white-space: nowrap;
+  text-align: left;
 }
 
 .footer-address {
@@ -48,16 +49,6 @@
 
 .footer-address:hover {
   text-decoration: underline;
-}
-
-.footer-address-mobile {
-  white-space: normal;    /* allow wrapping */
-  word-break: break-word; /* break long chunks if needed */
-  color: var(--white);
-  text-decoration: none;
-  font-size: 16px;
-  font-family: 'MicroFLF', serif;
-  text-align: left;
 }
 
 .footer-phone-number {
@@ -96,6 +87,7 @@
   text-decoration: none;
   font-family: 'MicroFLF', serif;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .footer-outer-stack-desktop {
@@ -123,12 +115,12 @@
   .footer-inner-stack {
     gap: 40px;
   }
-  .footer-address {
+  .footer-desktop-view {
     display: none;
   }
 
   .footer-outer-stack-desktop {
-    display: none;
+    gap: 80px;
   }
 
   .footer-outer-stack-mobile {
@@ -136,19 +128,30 @@
   }
 }
 @media (min-width: 899px) {
-  .footer-address-mobile {
+  .footer-mobile-view {
     display: none;
   }
 
   .footer-outer-stack-mobile {
     display: none;
   }
+}
 
+@media (max-width: 649px) {
+  .footer-outer-stack-desktop {
+    display: none;
+  }
+
+  .footer {
+    height: 600px;
+  }
+}
+@media (min-width: 649px) {
   .footer-outer-stack-mobile {
-    gap: 40px;
+    display: none;
   }
 }
 
-.left-align {
-  text-align: left;
-}
+/*.left-align {*/
+/*  text-align: left;*/
+/*}*/
