@@ -1,5 +1,5 @@
 import { motion } from "motion/react"
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.css'
 import {Menu, MenuItem, IconButton} from '@mui/material';
@@ -27,12 +27,23 @@ function NGLogo() {
 
 // DESKTOP
 function BannerSocialComponent() {
+    const [isLargeScreen, setIsLargeScreen] = useState(false);
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsLargeScreen(window.innerWidth > 650);
+        };
+
+        checkScreenSize(); // initial check
+        window.addEventListener('resize', checkScreenSize);
+
+        return () => window.removeEventListener('resize', checkScreenSize);
+    }, []);
     return (
         <div className='banner-social'>
             <Socials
                 className="header-social-stack"
             />
-            <div className="banner-nav-link">|</div>
+            { isLargeScreen && <div className="banner-nav-link">|</div> }
             <PhoneContact displayPhoneNumber={true} className='phone-contact-desktop' />
             <PhoneContact displayPhoneNumber={false} className='phone-contact-mobile' />
         </div>
@@ -125,9 +136,22 @@ function MobileHeader() {
 }
 
 function MobileTitle() {
+    const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+    useEffect(() => {
+        const checkScreenSize = () => {
+            setIsSmallScreen(window.innerWidth < 420);
+        };
+
+        checkScreenSize(); // initial check
+        window.addEventListener('resize', checkScreenSize);
+
+        return () => window.removeEventListener('resize', checkScreenSize);
+    }, []);
+
   return (
       <div className="mobile-title"> 
-          Neutral Ground Combat Sports
+          Neutral Ground {isSmallScreen && <br />} Combat Sports
       </div>
   )
 }

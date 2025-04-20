@@ -131,6 +131,8 @@
 /* MOBILE */
 .mobile-header {
   display: flex;
+  top: 45px;
+  right: 1vw;
 }
 
 .mobile-header ul {
@@ -142,11 +144,15 @@
 }
 
 .mobile-header ul li:first-child {
-  margin-right: 50px;
+  margin-right: 3vw;
 }
 
 .mobile-header ul li:last-child {
-  margin-right: 10px;
+  margin-right: 1px;
+}
+
+.mobile-title {
+  font-size: 3.5vw;
 }
 
   .mobile-tab {
@@ -191,5 +197,17 @@
 @media (max-width: 650px) {
   .phone-contact-desktop {
     display: none;
+  }
+
+  .banner-waiver {
+    display: flex;
+    align-items: stretch;
+    justify-content: left;
+    width: 100%;
+    margin-left: 5vw;
+  }
+
+  .banner-nav-link {
+    font-size: 3.5vw;
   }
 }
