@@ -13,6 +13,7 @@ function NGLogo() {
           alt=""
           width={200}
           height={200}
+          initial={{ x: '-300px', opacity: 0 }}
           animate={{ x: 0, opacity: 1, rotate: 360 }}
           transition={{ duration: 0.5, ease: "linear", type: "spring", stiffness: 50 }}
         />
