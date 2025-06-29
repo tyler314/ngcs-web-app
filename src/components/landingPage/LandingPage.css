@@ -1,17 +1,17 @@
 /* MicroFLF-regular - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'MicroFLF';
+  font-family: "MicroFLF";
   font-style: normal;
   font-weight: 400;
-  src: url('/src/fonts/microflf.ttf') format('ttf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/src/fonts/microflf.ttf") format("ttf"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 :root {
-  --ng-red: #9F0808;
+  --ng-red: #9f0808;
 }
 
-.landing-page-wrapper{
+.landing-page-wrapper {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -31,51 +31,30 @@
   line-height: 1.2;
   text-shadow:
     /* White stroke (inner) */
-          -1px -1px 0 white,
-          1px -1px 0 white,
-          -1px  1px 0 white,
-          1px  1px 0 white,
-          0   -1px 0 white,
-          -1px  0   0 white,
-          1px  0   0 white,
-          0    1px 0 white,
-
-            /* Thicker black stroke (outer) */
-          -4px -4px 0 black,
-          4px -4px 0 black,
-          -4px  4px 0 black,
-          4px  4px 0 black,
-          0   -4px 0 black,
-          -4px  0   0 black,
-          4px  0   0 black,
-          0    4px 0 black,
-
-            /* Extra black layers for even bolder effect */
-          -5px -5px 0 black,
-          5px -5px 0 black;
+    -1px -1px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white,
+    0 -1px 0 white,
+    -1px 0 0 white,
+    1px 0 0 white,
+    0 1px 0 white,
+    /* Thicker black stroke (outer) */ -4px -4px 0 black,
+    4px -4px 0 black,
+    -4px 4px 0 black,
+    4px 4px 0 black,
+    0 -4px 0 black,
+    -4px 0 0 black,
+    4px 0 0 black,
+    0 4px 0 black,
+    /* Extra black layers for even bolder effect */ -5px -5px 0 black,
+    5px -5px 0 black;
 }
 
-/* InfiniteCarousel */
-.carousel-container {
-    width: 100%;
-    overflow: hidden;
-}
-
-.carousel-track {
-    display: inline-flex;
-    white-space: nowrap;
-}
-
-.carousel-image {
-    height: 20vw;
-    width: auto;
-    object-fit: cover;
-    display: block;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .carousel-image {
-        height: 180px;
-    }
+.map-container {
+  width: 100vw;
+  height: 400px;
+  margin-top: 2rem;
+  margin-bottom: -4px;
+  overflow: hidden;
 }

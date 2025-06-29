@@ -1,34 +1,71 @@
 @font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: 'MicroFLF';
-    font-style: normal;
-    font-weight: 400;
-    src: url('/src/fonts/microflf.ttf') format('ttf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "MicroFLF";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/src/fonts/microflf.ttf") format("ttf"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 .social-nav-link {
-    color: #FFFFFF;
-    text-decoration: none;
-    font-size: 16px;
-    font-family: 'MicroFLF', serif;
-    margin-right: 10px;
-    white-space: nowrap;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: "MicroFLF", serif;
+  margin-right: 10px;
+  white-space: nowrap;
 }
 
 .social-nav-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .header-phone-number {
-    font-family: 'MicroFLF', serif;
+  font-family: "MicroFLF", serif;
 }
 a[href^="tel"] {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
 @media (max-width: 650px) {
-    .header-phone-number {
-        display: none;
-    }
+  .header-phone-number {
+    display: none;
+  }
+}
+
+.carousel-container {
+  width: 100%;
+  margin-bottom: -3px;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.carousel-image {
+  height: 20vw;
+  width: auto;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .carousel-image {
+    height: 180px;
+  }
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1rem;
+  padding: 1rem;
+}
+.photo-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
 }

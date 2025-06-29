@@ -1,18 +1,18 @@
 :root {
-  --ng-red: #9F0808;
+  --ng-red: #9f0808;
   --white: #ffffff;
   --inverted-ng-red: #22ccff;
 }
 
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'MicroFLF';
+  font-family: "MicroFLF";
   font-style: normal;
   font-weight: 400;
-  src: url('/src/fonts/microflf.ttf') format('ttf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/src/fonts/microflf.ttf") format("ttf"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-  /* NEW */
+/* NEW */
 .ng-logo-footer {
   margin-left: 20px;
   align-items: center;
@@ -34,7 +34,7 @@
   color: var(--white);
   text-decoration: none;
   font-size: 16px;
-  font-family: 'MicroFLF', serif;
+  font-family: "MicroFLF", serif;
   white-space: nowrap;
   text-align: left;
 }
@@ -43,7 +43,7 @@
   color: var(--white);
   text-decoration: none;
   font-size: 16px;
-  font-family: 'MicroFLF', serif;
+  font-family: "MicroFLF", serif;
   white-space: nowrap;
 }
 
@@ -55,7 +55,7 @@
   color: var(--white);
   text-decoration: none;
   font-size: 16px;
-  font-family: 'MicroFLF', serif;
+  font-family: "MicroFLF", serif;
   white-space: nowrap;
 }
 
@@ -85,7 +85,7 @@
   color: var(--white);
   font-size: 20px;
   text-decoration: none;
-  font-family: 'MicroFLF', serif;
+  font-family: "MicroFLF", serif;
   overflow: hidden;
   white-space: nowrap;
 }

@@ -1,9 +1,6 @@
 {
-    "physicalAddress": [
-        "7003 State Highway 144",
-        "Barton, WI 53095"
-    ],
-    "phoneNumber": "",
-    "email": "",
-    "instagramHandle": ""
+  "physicalAddress": ["7003 State Highway 144", "Barton, WI 53095"],
+  "phoneNumber": "",
+  "email": "",
+  "instagramHandle": ""
 }
