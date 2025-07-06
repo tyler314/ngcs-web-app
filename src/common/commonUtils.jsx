@@ -97,6 +97,9 @@ function InfiniteCarousel() {
 
 function PhotoGrid() {
   const [images, setImages] = useState([]);
+  const [showAll, setShowAll] = useState(false);
+  const { isMobile } = useIsMobile();
+  const MAX_VISIBLE_IMAGES = isMobile ? 6 : 9; // Show fewer images on mobile
 
   useEffect(() => {
     fetch(IMAGE_API)
@@ -112,22 +115,60 @@ function PhotoGrid() {
       .catch((err) => console.error("Failed to load images:", err));
   }, []);
 
+  const displayedImages = showAll
+    ? images
+    : images.slice(0, MAX_VISIBLE_IMAGES);
+
   return (
-    <div className="photo-grid">
-      {images.map((src, index) => (
-        <motion.div
-          className="photo-item"
-          key={index}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: index * 0.1 }}
+    <div className="photo-grid-container">
+      <div className={`photo-grid ${isMobile ? "mobile" : "desktop"}`}>
+        {displayedImages.map((src, index) => (
+          <motion.div
+            className="photo-item"
+            key={index}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              duration: 0.6,
+              delay: isMobile ? index * 0.05 : index * 0.1,
+            }}
+          >
+            <img src={src} alt={`photo-${index}`} />
+          </motion.div>
+        ))}
+      </div>
+      {images.length > MAX_VISIBLE_IMAGES && (
+        <button
+          className="photo-grid-toggle-button"
+          onClick={() => setShowAll((prev) => !prev)}
         >
-          <img src={src} alt={`photo-${index}`} />
-        </motion.div>
-      ))}
+          {showAll ? "Show Less" : "Show More"}
+        </button>
+      )}
     </div>
   );
 }
 
-export { Socials, PhoneContact, InfiniteCarousel, PhotoGrid };
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkDeviceType = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    checkDeviceType();
+
+    // Add event listener
+    window.addEventListener("resize", checkDeviceType);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkDeviceType);
+  }, []);
+
+  return { isMobile };
+};
+
+export { Socials, PhoneContact, InfiniteCarousel, PhotoGrid, useIsMobile };

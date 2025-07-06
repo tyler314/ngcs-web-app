@@ -70,7 +70,19 @@ export default function LandingPage() {
             pushing for your next title, our training environment is built to
             support your progress.
           </p>
-          <button className="primary-cta">Download Our Schedule</button>
+            <motion.button
+                className="primary-cta"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                    opacity: { duration: 0.2 },
+                    scale: { type: "spring", stiffness: 400, damping: 17 }
+                }}
+            >
+              Download Our Schedule
+          </motion.button>
         </motion.div>
       </section>
       <PhotoGrid />
