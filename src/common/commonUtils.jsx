@@ -2,14 +2,12 @@ import "./commonUtils.css";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "motion/react";
+import { IMAGE_API } from "./constants";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import Stack from "@mui/material/Stack";
-
-const IMAGE_API =
-  "https://l4ntih2s43iaybgsadwp5b2xka0yxyup.lambda-url.us-east-2.on.aws";
 
 function Socials(props) {
   return (

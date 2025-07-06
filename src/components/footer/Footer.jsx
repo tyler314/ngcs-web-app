@@ -2,6 +2,9 @@ import "./Footer.css";
 import Stack from "@mui/material/Stack";
 import { Socials, PhoneContact } from "../../common/commonUtils";
 import PlaceIcon from "@mui/icons-material/Place";
+import { navTabsData } from "../../common/constants";
+import { NavLink } from "react-router-dom";
+import React from "react";
 
 function NGLogo() {
   return (
@@ -12,13 +15,21 @@ function NGLogo() {
 }
 
 function PageNavStack() {
+  const navTabs = navTabsData.map((tab) => ({
+    ...tab,
+    className: "footer-tab",
+  }));
   return (
     <div className="footer-nav-stack">
-      <div>About Us</div>
-      <div>Programs</div>
-      <div>Schedule</div>
-      <div>Instructors</div>
-      <div>Contact Us</div>
+      <ul>
+        {navTabs.map((item, index) => (
+          <li key={index}>
+            <NavLink to={item.path} exact className={item.className}>
+              {item.label}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

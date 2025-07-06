@@ -1,14 +1,9 @@
 import { motion } from "motion/react";
+import { BANNER_IMAGE_URI, GYM_SCHEDULE } from "../../common/constants";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 import { PhotoGrid } from "../../common/commonUtils";
 import "./LandingPage.css";
-
-const BANNER_IMAGE_URI =
-  "https://ngcs-website-images.s3.us-east-2.amazonaws.com/landing-page-banner.jpg";
-
-const GYM_SCHEDULE =
-  "https://ngwb-public-forms.s3.us-east-2.amazonaws.com/NGCS_Schedule.pdf";
 
 function Title() {
   return (

@@ -90,6 +90,32 @@
   white-space: nowrap;
 }
 
+.footer-nav-stack ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-nav-stack li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-nav-stack a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+.footer-nav-stack a:hover {
+  text-decoration: underline;
+}
+
+/* Remove spacing for mobile view */
+@media (max-width: 649px) {
+  .footer-nav-stack li {
+    margin-bottom: 0.25rem;
+  }
+}
+
 .footer-outer-stack-desktop {
   display: flex;
   flex-direction: row;
@@ -151,7 +177,3 @@
     display: none;
   }
 }
-
-/*.left-align {*/
-/*  text-align: left;*/
-/*}*/

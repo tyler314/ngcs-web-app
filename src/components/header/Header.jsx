@@ -2,9 +2,42 @@ import { motion } from "motion/react";
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
-import { Menu, MenuItem, IconButton } from "@mui/material";
+import { Menu, IconButton, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Socials, PhoneContact } from "../../common/commonUtils";
+import { Socials, PhoneContact, useIsMobile } from "../../common/commonUtils";
+import { navTabsData } from "../../common/constants";
+
+function NavigationTabs(props) {
+  const { isMobile } = useIsMobile();
+
+  const navTabs = navTabsData.map((tab) => ({
+    ...tab,
+    className:
+      tab.isSpecial && props.isHeader
+        ? `${props.className}-with-box`
+        : props.className,
+  }));
+
+  return isMobile ? (
+    navTabs.map((item, index) => (
+      <MenuItem key={index} className={item.className}>
+        <NavLink to={item.path} exact>
+          {item.label}
+        </NavLink>
+      </MenuItem>
+    ))
+  ) : (
+    <ul>
+      {navTabs.map((item, index) => (
+        <li key={index}>
+          <NavLink to={item.path} exact className={item.className}>
+            {item.label}
+          </NavLink>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 function NGLogo() {
   return (
@@ -74,32 +107,8 @@ function Banner() {
 function DesktopHeader() {
   return (
     <div className="desktop-header">
-      <ul>
-        <li>
-          <DesktopTab label="About Us" className="desktop-tab" />
-        </li>
-        <li>
-          <DesktopTab label="Programs" className="desktop-tab" />
-        </li>
-        <li>
-          <DesktopTab label="Schedule" className="desktop-tab" />
-        </li>
-        <li>
-          <DesktopTab label="Instructors" className="desktop-tab" />
-        </li>
-        <li>
-          <DesktopTab label="CONTACT US" className="desktop-tab-with-box" />
-        </li>
-      </ul>
+      <NavigationTabs className="desktop-tab" isHeader={true} />
     </div>
-  );
-}
-
-function DesktopTab(props) {
-  return (
-    <NavLink to="/" exact className={props.className}>
-      {props.label}
-    </NavLink>
   );
 }
 
@@ -163,26 +172,7 @@ function HamburgerDropDown() {
         onClose={closeMenu}
         keepMounted
       >
-        <MenuItem className="mobile-tab">
-          <NavLink to="/" exact>
-            About
-          </NavLink>
-        </MenuItem>
-        <MenuItem className="mobile-tab">
-          <NavLink to="/" exact>
-            Schedule
-          </NavLink>
-        </MenuItem>
-        <MenuItem className="mobile-tab">
-          <NavLink to="/" exact>
-            Programs
-          </NavLink>
-        </MenuItem>
-        <MenuItem className="mobile-tab">
-          <NavLink to="/" exact>
-            Instructors
-          </NavLink>
-        </MenuItem>
+        <NavigationTabs className="mobile-tab" />
       </Menu>
     </div>
   );
