@@ -7,6 +7,9 @@ import "./LandingPage.css";
 const BANNER_IMAGE_URI =
   "https://ngcs-website-images.s3.us-east-2.amazonaws.com/landing-page-banner.jpg";
 
+const GYM_SCHEDULE =
+  "https://ngwb-public-forms.s3.us-east-2.amazonaws.com/NGCS_Schedule.pdf";
+
 function Title() {
   return (
     <div className="neutral-ground-banner">
@@ -70,18 +73,19 @@ export default function LandingPage() {
             pushing for your next title, our training environment is built to
             support your progress.
           </p>
-            <motion.button
-                className="primary-cta"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{
-                    opacity: { duration: 0.2 },
-                    scale: { type: "spring", stiffness: 400, damping: 17 }
-                }}
-            >
-              Download Our Schedule
+          <motion.button
+            className="primary-cta"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              opacity: { duration: 0.2 },
+              scale: { type: "spring", stiffness: 400, damping: 17 },
+            }}
+            onClick={() => window.open(GYM_SCHEDULE)}
+          >
+            Download Our Schedule
           </motion.button>
         </motion.div>
       </section>
