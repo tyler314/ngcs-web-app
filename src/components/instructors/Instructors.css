@@ -1,0 +1,156 @@
+/* Define the custom font */
+@font-face {
+  font-family: 'MicroFLF';
+  src: url("/src/fonts/microflf.ttf") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "MicroFLF-Bold";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/src/fonts/microflf-bold.ttf") format("truetype");
+}
+
+/* Instructors Component Styles */
+.instructors-container {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+.instructors-header {
+  text-align: left;
+  margin-bottom: 2rem;
+}
+
+.instructors-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+.instructors-header p {
+  font-size: 1.2rem;
+  color: #666;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+/* Grid layout for the instructor cards */
+.instructors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+/* Instructor Card Styles */
+.instructor-card {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+.instructor-image-container {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.instructor-image {
+  width: 100%;
+  height: auto;
+}
+
+.instructor-simple-info {
+  text-align: left;
+}
+
+.instructor-simple-info h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  text-align: left;
+  font-family: 'MicroFLF-Bold', sans-serif;
+}
+
+.instructor-simple-info p {
+  margin: 0;
+  text-align: left;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .instructors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .instructors-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .instructors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .instructors-container {
+    padding: 1rem;
+  }
+}
+
+/* Add these styles to your existing CSS */
+
+.disciplines-container {
+  margin-top: 0.5rem;
+}
+
+.disciplines-title {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+/* Update the disciplines-list style to use dashes instead of bullets */
+.disciplines-list {
+  list-style-type: none; /* Remove default bullets */
+  padding-left: 0; /* Remove default padding */
+  margin: 0.25rem 0 0.75rem 0;
+  text-align: left;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+.disciplines-list li {
+  margin-bottom: 0.25rem;
+  font-family: 'MicroFLF', sans-serif;
+  position: relative;
+  padding-left: 1rem; /* Make room for the dash */
+}
+
+.disciplines-list li::before {
+  content: "-"; /* Add a dash */
+  position: absolute;
+  left: 0;
+  color: #888; /* Light gray color for the dash */
+}
+
+.instructor-role {
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+.instructor-bio {
+  margin-top: 0.5rem;
+  font-family: 'MicroFLF', sans-serif;
+}
+.instructors-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}

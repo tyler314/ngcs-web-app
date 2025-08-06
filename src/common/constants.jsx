@@ -13,6 +13,6 @@ export const navTabsData = [
   { label: "About Us", path: "/" },
   { label: "Programs", path: "/" },
   { label: "Schedule", path: GYM_SCHEDULE },
-  { label: "Instructors", path: "/" },
+  { label: "Instructors", path: "/instructors" },
   { label: "Contact Us", path: "/", isSpecial: true },
 ];

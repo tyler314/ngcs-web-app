@@ -8,6 +8,7 @@
 # development
 /.vscode
 /.idea
+/public/tmpImgs
 
 # testing
 /coverage
