@@ -54,14 +54,24 @@
   font-family: 'MicroFLF', sans-serif;
 }
 
+/* Update the instructor-image-container styles */
 .instructor-image-container {
   width: 100%;
   margin-bottom: 15px;
+  position: relative;
+  padding-top: 100%; /* This creates a 1:1 aspect ratio (square) */
+  overflow: hidden;
 }
 
+/* Update the instructor-image styles */
 .instructor-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover; /* This makes the image cover the square container */
+  object-position: center top; /* Focus on the top part of the image (usually the face) */
 }
 
 .instructor-simple-info {
@@ -153,4 +163,15 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+/* Add this style for the empty state */
+.instructors-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-family: 'MicroFLF', sans-serif;
+  color: #666;
+  font-size: 1.2rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  margin-top: 1rem;
 }

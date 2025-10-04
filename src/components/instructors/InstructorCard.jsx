@@ -1,5 +1,6 @@
 import React from "react";
 import "./Instructors.css";
+import { S3_INSTRUCTORS_BUCKET_URL, DEFAULT_INSTRUCTOR_IMAGE } from "../../common/constants";
 
 /**
  * InstructorCard component displays information about a single instructor.
@@ -10,18 +11,19 @@ export default function InstructorCard({ instructor }) {
   const { name, role, disciplines, bio, imgSrc } = instructor;
 
   // Convert comma-separated disciplines into an array
-  // Make sure to handle both single and multiple values
-  const disciplinesList = disciplines ? disciplines.split(',').filter(item => item.trim() !== '') : [];
+  const disciplinesList = disciplines
+    ? disciplines.split(',').filter(item => item.trim() !== '')
+    : [];
 
   return (
     <div className="instructor-card">
       <div className="instructor-image-container">
-        <img 
-          src={imgSrc} 
-          alt={`${name}, ${role}`} 
+        <img
+          src={imgSrc}
+          alt={`${name}, ${role}`}
           className="instructor-image"
           onError={(e) => {
-            e.target.src = "/path/to/default-instructor.jpg"; // Fallback image
+            e.target.src = `${S3_INSTRUCTORS_BUCKET_URL}${DEFAULT_INSTRUCTOR_IMAGE}`;
           }}
         />
       </div>
@@ -29,7 +31,7 @@ export default function InstructorCard({ instructor }) {
       <div className="instructor-simple-info">
         <h3>{name}</h3>
         <p className="instructor-role">{role}</p>
-        
+
         {disciplinesList.length > 0 ? (
           <div className="disciplines-container">
             <p className="disciplines-title">Disciplines:</p>
@@ -42,7 +44,7 @@ export default function InstructorCard({ instructor }) {
         ) : (
           <p>No disciplines listed</p>
         )}
-        
+
         {bio && <p className="instructor-bio">{bio}</p>}
       </div>
     </div>

@@ -7,7 +7,20 @@ const BANNER_IMAGE_URI =
 const GYM_SCHEDULE =
   "https://ngwb-public-forms.s3.us-east-2.amazonaws.com/NGCS_Schedule.pdf";
 
-export { IMAGE_API, BANNER_IMAGE_URI, GYM_SCHEDULE };
+const INSTRUCTORS_API = "https://kxanxtcodnphw6o2txqqphuede0ipyzm.lambda-url.us-east-2.on.aws/";
+
+// S3 bucket for instructor images
+const S3_INSTRUCTORS_BUCKET_URL = "https://ngcs-instructors.s3.us-east-2.amazonaws.com/";
+const DEFAULT_INSTRUCTOR_IMAGE = "default-instructor.jpg";
+
+export { 
+  IMAGE_API, 
+  BANNER_IMAGE_URI, 
+  GYM_SCHEDULE, 
+  INSTRUCTORS_API,
+  S3_INSTRUCTORS_BUCKET_URL,
+  DEFAULT_INSTRUCTOR_IMAGE
+};
 
 export const navTabsData = [
   { label: "About Us", path: "/" },
