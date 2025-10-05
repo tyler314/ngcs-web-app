@@ -1,0 +1,21 @@
+.schedule-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.schedule-content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Reset any margins that might be causing spacing */
+.schedule-page-container {
+  margin-bottom: 0;
+}
+
+/* Ensure the footer has no margin at the top */
+footer {
+  margin-top: 0;
+}

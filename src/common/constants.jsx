@@ -25,7 +25,7 @@ export {
 export const navTabsData = [
   { label: "About Us", path: "/" },
   { label: "Programs", path: "/" },
-  { label: "Schedule", path: GYM_SCHEDULE },
+  { label: "Schedule", path: "/schedule" },
   { label: "Instructors", path: "/instructors" },
   { label: "Contact Us", path: "/", isSpecial: true },
 ];
