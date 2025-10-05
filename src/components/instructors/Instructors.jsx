@@ -103,9 +103,9 @@ export default function Instructors() {
   const listToRender = instructors.length > 0 ? instructors : MOCK_INSTRUCTORS;
 
   return (
-    <div className="instructors-page-wrapper">
+    <div className="instructors-page-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Header />
-      <section className="instructors-container">
+      <section className="instructors-container" style={{ flex: '1 0 auto', paddingBottom: '0' }}>
         <div className="instructors-header">
           <h1>Instructors</h1>
           <p>Meet the experts who will guide you on your combat sports journey</p>
