@@ -86,19 +86,20 @@ function BannerSocialComponent() {
   );
 }
 
-function TrialButtonHeader() {
-  return (
-    <div className="banner-waiver">
-      <NavLink to="/free-trial" className="banner-nav-link">
-        Click Here for a Free Week Trial
-      </NavLink>
-    </div>
-  );
-}
+// function TrialButtonHeader() {
+//   return (
+//     <div className="banner-waiver">
+//       <NavLink to="/free-trial" className="banner-nav-link">
+//         Click Here for a Free Week Trial
+//       </NavLink>
+//     </div>
+//   );
+// }
+
 function Banner() {
   return (
     <div className="banner-content">
-      <TrialButtonHeader />
+      {/*<TrialButtonHeader />*/}
       <BannerSocialComponent />
     </div>
   );
