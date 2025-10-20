@@ -5,6 +5,7 @@ import LandingPage from "./components/landingPage/LandingPage";
 import Instructors from './components/instructors/Instructors';
 import Schedule from "./components/schedule/Schedule";
 import ContactUs from "./components/contact/ContactUs";
+import Programs from "./components/programs/Programs";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/instructors" element={<Instructors />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/programs" element={<Programs />} />
       </Routes>
     </div>
   );

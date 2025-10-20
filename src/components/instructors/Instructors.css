@@ -23,8 +23,20 @@
 }
 
 .instructors-header {
-  text-align: left;
+  text-align: center;
   margin-bottom: 2rem;
+}
+
+.instructors-error {
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 8px;
+  color: #856404;
+  text-align: center;
+  padding: 2rem;
+  font-family: 'MicroFLF', sans-serif;
+  color: #666;
+  font-size: 1.1rem;
 }
 
 .instructors-header h1 {

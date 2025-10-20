@@ -12,6 +12,8 @@ const GYM_EMAIL =
 
 const INSTRUCTORS_API = "https://kxanxtcodnphw6o2txqqphuede0ipyzm.lambda-url.us-east-2.on.aws/";
 
+const PROGRAMS_API = "https://cxy6ojnr25yufgsvlbcjm6v2ca0akviq.lambda-url.us-east-2.on.aws/";
+
 // S3 bucket for instructor images
 const S3_INSTRUCTORS_BUCKET_URL = "https://ngcs-instructors.s3.us-east-2.amazonaws.com/";
 const DEFAULT_INSTRUCTOR_IMAGE = "default-instructor.jpg";
@@ -22,13 +24,14 @@ export {
   GYM_SCHEDULE,
   GYM_EMAIL,
   INSTRUCTORS_API,
+  PROGRAMS_API,
   S3_INSTRUCTORS_BUCKET_URL,
   DEFAULT_INSTRUCTOR_IMAGE
 };
 
 export const navTabsData = [
   { label: "About Us", path: "/" },
-  { label: "Programs", path: "/" },
+  { label: "Programs", path: "/programs" },
   { label: "Schedule", path: "/schedule" },
   { label: "Instructors", path: "/instructors" },
   { label: "Contact Us", path: "/contact", isSpecial: true },

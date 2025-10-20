@@ -1,0 +1,110 @@
+/* Define the custom font */
+@font-face {
+    font-family: 'MicroFLF';
+    src: url("/src/fonts/microflf.ttf") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "MicroFLF-Bold";
+    font-style: normal;
+    font-weight: 400;
+    src: url("/src/fonts/microflf-bold.ttf") format("truetype");
+}
+
+/* Programs Page Wrapper */
+.programs-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Programs Container */
+.programs-container {
+    padding: 2rem;
+    padding-bottom: 4rem;
+    max-width: calc(1400px + 4rem); /* Account for padding */
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'MicroFLF', sans-serif;
+}
+
+/* Programs Header */
+.programs-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.programs-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    font-family: 'MicroFLF', sans-serif;
+}
+
+.programs-header p {
+    font-size: 1.2rem;
+    color: #666;
+    font-family: 'MicroFLF', sans-serif;
+}
+
+/* Programs List - Stacked Bubbles */
+.programs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Loading and Error States */
+.programs-loading,
+.programs-error {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'MicroFLF', sans-serif;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.programs-error {
+    background-color: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 8px;
+    color: #856404;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .programs-container {
+        padding: 1.5rem;
+        padding-bottom: 3rem;
+    }
+
+    .programs-header h1 {
+        font-size: 2rem;
+    }
+
+    .programs-header p {
+        font-size: 1rem;
+    }
+
+    .programs-header {
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .programs-container {
+        padding: 1rem;
+        padding-bottom: 2rem;
+    }
+
+    .programs-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .programs-list {
+        gap: 1rem;
+    }
+}

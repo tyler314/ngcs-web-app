@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import "./Instructors.css";
 import InstructorCard from "./InstructorCard";
@@ -11,28 +11,6 @@ import {
 } from "../../common/constants";
 
 export default function Instructors() {
-  // Minimal mock data to keep the page usable if fetch fails
-  const MOCK_INSTRUCTORS = useMemo(
-    () => [
-      {
-        id: "mock-1",
-        name: "Tim Hagan",
-        role: "Head Coach + Owner",
-        disciplines: "Brazilian Jiu-Jitsu,Boxing,Kickboxing,MMA",
-        bio: "Professional fighter with multiple championship titles.",
-        imgSrc: `${S3_INSTRUCTORS_BUCKET_URL}${DEFAULT_INSTRUCTOR_IMAGE}`,
-      },
-      {
-        id: "mock-2",
-        name: "Tyler Roberts",
-        role: "Coach",
-        disciplines: "Brazilian Jiu-Jitsu",
-        bio: "Pretty cool dude",
-        imgSrc: `${S3_INSTRUCTORS_BUCKET_URL}${DEFAULT_INSTRUCTOR_IMAGE}`,
-      },
-    ],
-    [S3_INSTRUCTORS_BUCKET_URL, DEFAULT_INSTRUCTOR_IMAGE]
-  );
 
   const [instructors, setInstructors] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -100,7 +78,7 @@ export default function Instructors() {
     };
   }, []);
 
-  const listToRender = instructors.length > 0 ? instructors : MOCK_INSTRUCTORS;
+  const listToRender = instructors.length > 0 ? instructors : [];
 
   return (
     <div className="instructors-page-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
@@ -118,7 +96,7 @@ export default function Instructors() {
 
         {error && !loading && (
           <div className="instructors-error">
-            Failed to load instructors. Using sample data instead.
+            Failed to load instructors.
           </div>
         )}
 
