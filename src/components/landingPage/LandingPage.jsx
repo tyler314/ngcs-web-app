@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { BANNER_IMAGE_URI, GYM_SCHEDULE } from "../../common/constants";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import { PhotoGrid } from "../../common/commonUtils";
+import {PhotoGrid, useContactInfo} from "../../common/commonUtils";
 import "./LandingPage.css";
 
 function Title() {
@@ -30,11 +30,13 @@ function Title() {
 }
 
 function GoogleEmbedMap() {
+  const { contactInfo } = useContactInfo();
+  if (!contactInfo) return null;
   return (
     <div className="map-container">
       <iframe
         title="Neutral Ground Combat Sports Location"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2896.5466451799502!2d-88.17599072383396!3d43.44918357111269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88045f02ad43be17%3A0xa058ab57f7fbb294!2sNeutral%20Ground%20West%20Bend!5e0!3m2!1sen!2sus!4v1751224984721!5m2!1sen!2sus"
+        src={contactInfo.address.googleEmbedLink}
         width="100%"
         height="100%"
         style={{ border: 0 }}
