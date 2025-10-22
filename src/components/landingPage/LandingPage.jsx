@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { BANNER_IMAGE_URI, GYM_SCHEDULE } from "../../common/constants";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import {PhotoGrid, useContactInfo} from "../../common/commonUtils";
+import { PhotoGrid, useContactInfo } from "../../common/commonUtils";
 import "./LandingPage.css";
 
 function Title() {
@@ -51,7 +51,7 @@ function GoogleEmbedMap() {
 export default function LandingPage() {
   return (
     <div className="landing-page-wrapper">
-      <Header isHomePage={true}/>
+      <Header isHomePage={true} />
       <Title />
       <img className="read-more-artist-image" src={BANNER_IMAGE_URI} alt="" />
       <section className="mission-statement">

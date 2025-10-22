@@ -40,30 +40,30 @@ function NavigationTabs(props) {
 }
 
 function NGLogo({ isHomePage }) {
-    return (
-        <div className="ng-logo-header">
-            <NavLink to="/" end>
-                {isHomePage ? (
-                    <motion.img
-                        src="/nglogo192.png"
-                        alt="Neutral Ground logo"
-                        width={70}
-                        height={70}
-                        initial={{ x: -100, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1, rotate: 720 }}
-                        transition={{ type: 'spring', stiffness: 50 }}
-                    />
-                ) : (
-                    <img
-                        src="/nglogo192.png"
-                        alt="Neutral Ground logo"
-                        width={70}
-                        height={70}
-                    />
-                )}
-            </NavLink>
-        </div>
-    );
+  return (
+    <div className="ng-logo-header">
+      <NavLink to="/" end>
+        {isHomePage ? (
+          <motion.img
+            src="/nglogo192.png"
+            alt="Neutral Ground logo"
+            width={70}
+            height={70}
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, rotate: 720 }}
+            transition={{ type: "spring", stiffness: 50 }}
+          />
+        ) : (
+          <img
+            src="/nglogo192.png"
+            alt="Neutral Ground logo"
+            width={70}
+            height={70}
+          />
+        )}
+      </NavLink>
+    </div>
+  );
 }
 
 // DESKTOP

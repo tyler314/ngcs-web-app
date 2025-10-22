@@ -1,6 +1,9 @@
 import React from "react";
 import "./Instructors.css";
-import { S3_INSTRUCTORS_BUCKET_URL, DEFAULT_INSTRUCTOR_IMAGE } from "../../common/constants";
+import {
+  S3_INSTRUCTORS_BUCKET_URL,
+  DEFAULT_INSTRUCTOR_IMAGE,
+} from "../../common/constants";
 
 /**
  * InstructorCard component displays information about a single instructor.
@@ -12,7 +15,7 @@ export default function InstructorCard({ instructor }) {
 
   // Convert comma-separated disciplines into an array
   const disciplinesList = disciplines
-    ? disciplines.split(',').filter(item => item.trim() !== '')
+    ? disciplines.split(",").filter((item) => item.trim() !== "")
     : [];
 
   return (

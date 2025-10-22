@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import "./Instructors.css";
 import InstructorCard from "./InstructorCard";
 import Header from "../header/Header";
@@ -7,11 +7,10 @@ import Footer from "../footer/Footer";
 import {
   INSTRUCTORS_API,
   S3_INSTRUCTORS_BUCKET_URL,
-  DEFAULT_INSTRUCTOR_IMAGE
+  DEFAULT_INSTRUCTOR_IMAGE,
 } from "../../common/constants";
 
 export default function Instructors() {
-
   const [instructors, setInstructors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -52,9 +51,7 @@ export default function Instructors() {
         const data = await res.json();
 
         const list = Array.isArray(data) ? data : data?.instructors || [];
-        const normalized = list
-          .map(normalizeInstructor)
-          .filter(Boolean);
+        const normalized = list.map(normalizeInstructor).filter(Boolean);
 
         if (isMounted) {
           setInstructors(normalized);
@@ -81,12 +78,20 @@ export default function Instructors() {
   const listToRender = instructors.length > 0 ? instructors : [];
 
   return (
-    <div className="instructors-page-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div
+      className="instructors-page-wrapper"
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+    >
       <Header />
-      <section className="instructors-container" style={{ flex: '1 0 auto', paddingBottom: '0' }}>
+      <section
+        className="instructors-container"
+        style={{ flex: "1 0 auto", paddingBottom: "0" }}
+      >
         <div className="instructors-header">
           <h1>Instructors</h1>
-          <p>Meet the experts who will guide you on your combat sports journey</p>
+          <p>
+            Meet the experts who will guide you on your combat sports journey
+          </p>
         </div>
 
         {/* Loading and error states */}
@@ -95,9 +100,7 @@ export default function Instructors() {
         )}
 
         {error && !loading && (
-          <div className="instructors-error">
-            Failed to load instructors.
-          </div>
+          <div className="instructors-error">Failed to load instructors.</div>
         )}
 
         <div className="instructors-grid">
