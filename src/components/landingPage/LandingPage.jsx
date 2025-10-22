@@ -51,7 +51,7 @@ function GoogleEmbedMap() {
 export default function LandingPage() {
   return (
     <div className="landing-page-wrapper">
-      <Header />
+      <Header isHomePage={true}/>
       <Title />
       <img className="read-more-artist-image" src={BANNER_IMAGE_URI} alt="" />
       <section className="mission-statement">
