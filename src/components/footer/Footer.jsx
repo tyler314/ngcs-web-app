@@ -1,6 +1,10 @@
 import "./Footer.css";
 import Stack from "@mui/material/Stack";
-import { Socials, PhoneContact } from "../../common/commonUtils";
+import {
+  Socials,
+  PhoneContact,
+  useContactInfo,
+} from "../../common/commonUtils";
 import PlaceIcon from "@mui/icons-material/Place";
 import { navTabsData } from "../../common/constants";
 import { NavLink } from "react-router-dom";
@@ -35,23 +39,23 @@ function PageNavStack() {
 }
 
 function AddressContact() {
+  const { contactInfo } = useContactInfo();
+
+  if (!contactInfo) return null;
+
   return (
     <Stack direction="row" spacing={1} alignItems="left">
       <PlaceIcon />
       <div className="footer-desktop-view">
-        <a
-          href="https://maps.google.com/?q=Neutral+Ground+West+Bend"
-          className="footer-address"
-        >
-          7003 State Hwy 144, West Bend, WI 53090
+        <a href={contactInfo.address.googleMapsLink} className="footer-address">
+          {contactInfo.address.full}
         </a>
       </div>
       <div className="footer-mobile-view">
-        <a
-          href="https://maps.google.com/?q=Neutral+Ground+West+Bend"
-          className="footer-address"
-        >
-          7003 State Hwy 144, <br /> West Bend, WI 53090
+        <a href={contactInfo.address.googleMapsLink} className="footer-address">
+          {contactInfo.address.street}, <br />
+          {contactInfo.address.city}, {contactInfo.address.state}{" "}
+          {contactInfo.address.zip}
         </a>
       </div>
     </Stack>
@@ -59,6 +63,10 @@ function AddressContact() {
 }
 
 function AddressAndSocials() {
+  const { contactInfo } = useContactInfo();
+
+  if (!contactInfo) return null;
+
   return (
     <Stack
       direction="column"
@@ -66,7 +74,7 @@ function AddressAndSocials() {
       alignItems="center"
       className="footer-nav-link"
     >
-      <div className="footer-desktop-view">Neutral Ground Combat Sports</div>
+      <div className="footer-desktop-view">{contactInfo.businessName}</div>
       <div className="footer-mobile-view">
         Neutral Ground <br /> Combat Sports
       </div>

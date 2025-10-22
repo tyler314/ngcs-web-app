@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import LandingPage from "./components/landingPage/LandingPage";
-import Instructors from './components/instructors/Instructors';
+import Instructors from "./components/instructors/Instructors";
 import Schedule from "./components/schedule/Schedule";
 import ContactUs from "./components/contact/ContactUs";
 import Programs from "./components/programs/Programs";

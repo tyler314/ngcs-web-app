@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "motion/react";
 import { IMAGE_API } from "./constants";
+import { useContactInfo } from "./useContactInfo";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
@@ -10,6 +11,10 @@ import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import Stack from "@mui/material/Stack";
 
 function Socials(props) {
+  const { contactInfo } = useContactInfo();
+
+  if (!contactInfo) return null;
+
   return (
     <Stack
       direction="row"
@@ -18,20 +23,20 @@ function Socials(props) {
       className={props.className}
     >
       <NavLink
-        to="https://www.facebook.com/profile.php?id=100057586954258"
+        to={contactInfo.social.facebook}
         exact
         className="social-nav-link"
       >
         <FacebookOutlinedIcon />
       </NavLink>
       <NavLink
-        to="https://www.instagram.com/neutralgroundcombatsports/"
+        to={contactInfo.social.instagram}
         exact
         className="social-nav-link"
       >
         <InstagramIcon />
       </NavLink>
-      <a href={"mailto:info@westbendbjj.com"} className="social-nav-link">
+      <a href={`mailto:${contactInfo.email}`} className="social-nav-link">
         <EmailOutlinedIcon />
       </a>
     </Stack>
@@ -39,9 +44,13 @@ function Socials(props) {
 }
 
 function PhoneContact({ displayPhoneNumber = true, className }) {
+  const { contactInfo } = useContactInfo();
+
+  if (!contactInfo) return null;
+
   return (
     <div className={className}>
-      <a href={`tel:2623358020`}>
+      <a href={`tel:${contactInfo.phone.replace(/[^0-9]/g, "")}`}>
         <Stack
           direction="row"
           spacing={1}
@@ -53,7 +62,7 @@ function PhoneContact({ displayPhoneNumber = true, className }) {
             className="header-phone-number"
             style={{ display: displayPhoneNumber ? "block" : "none" }}
           >
-            262-335-8020
+            {contactInfo.phone}
           </div>
         </Stack>
       </a>
@@ -86,7 +95,12 @@ function InfiniteCarousel() {
         }}
       >
         {images.map((src, idx) => (
-          <img src={src} alt={`carousel-${idx}`} className="carousel-image" />
+          <img
+            src={src}
+            alt={`carousel-${idx}`}
+            className="carousel-image"
+            key={idx}
+          />
         ))}
       </motion.div>
     </div>
@@ -97,7 +111,7 @@ function PhotoGrid() {
   const [images, setImages] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const { isMobile } = useIsMobile();
-  const MAX_VISIBLE_IMAGES = isMobile ? 6 : 9; // Show fewer images on mobile
+  const MAX_VISIBLE_IMAGES = isMobile ? 6 : 9;
 
   useEffect(() => {
     fetch(IMAGE_API)
@@ -156,17 +170,20 @@ const useIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
 
-    // Initial check
     checkDeviceType();
-
-    // Add event listener
     window.addEventListener("resize", checkDeviceType);
 
-    // Cleanup
     return () => window.removeEventListener("resize", checkDeviceType);
   }, []);
 
   return { isMobile };
 };
 
-export { Socials, PhoneContact, InfiniteCarousel, PhotoGrid, useIsMobile };
+export {
+  Socials,
+  PhoneContact,
+  InfiniteCarousel,
+  PhotoGrid,
+  useIsMobile,
+  useContactInfo,
+};

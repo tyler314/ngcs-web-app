@@ -1,7 +1,7 @@
 /* Import the custom fonts */
 @font-face {
-  font-family: 'MicroFLF';
-  src: url("/src/fonts/microflf.ttf") format('truetype');
+  font-family: "MicroFLF";
+  src: url("/src/fonts/microflf.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: 'MicroFLF', sans-serif;
+  font-family: "MicroFLF", sans-serif;
 }
 
 .contact-content {
@@ -45,18 +45,18 @@
 }
 
 .contact-title {
-  font-family: 'MicroFLF-Bold', sans-serif;
+  font-family: "MicroFLF-Bold", sans-serif;
   font-size: 3rem;
 }
 
 .contact-subtitle {
-  font-family: 'MicroFLF', sans-serif;
+  font-family: "MicroFLF", sans-serif;
   font-size: 1.3rem;
   color: #666;
 }
 
 .contact-section-title {
-  font-family: 'MicroFLF-Bold', sans-serif;
+  font-family: "MicroFLF-Bold", sans-serif;
   font-size: 2.2rem;
 }
 
@@ -75,7 +75,9 @@
   align-items: center;
   color: #333;
   text-decoration: none;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
   text-align: center;
   max-width: 220px;
 }
@@ -96,7 +98,7 @@
 }
 
 .contact-info-text {
-  font-family: 'MicroFLF', sans-serif;
+  font-family: "MicroFLF", sans-serif;
   font-size: 1.2rem;
   line-height: 1.4;
 }
@@ -116,7 +118,9 @@
   align-items: center;
   color: var(--ng-red);
   text-decoration: none;
-  transition: transform 0.3s ease, color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
 }
 
 .social-media-link:hover {
@@ -130,7 +134,7 @@
 }
 
 .social-media-text {
-  font-family: 'MicroFLF', sans-serif;
+  font-family: "MicroFLF", sans-serif;
   font-size: 1.2rem;
   color: #333;
 }

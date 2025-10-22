@@ -1,132 +1,132 @@
 /* Base Program Card - Bubble Style */
 .program-card {
-    border-radius: 32px;
-    padding: 2.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: 'MicroFLF', sans-serif;
-    text-align: center;
+  border-radius: 32px;
+  padding: 2.5rem;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  font-family: "MicroFLF", sans-serif;
+  text-align: center;
 }
 
 .program-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
 }
 
 /* Colored Background (Red) - Even indices */
 .program-card-colored {
-    background-color: var(--ng-red);
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(155, 28, 28, 0.2);
+  background-color: var(--ng-red);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(155, 28, 28, 0.2);
 }
 
 .program-card-colored:hover {
-    box-shadow: 0 12px 32px rgba(155, 28, 28, 0.3);
+  box-shadow: 0 12px 32px rgba(155, 28, 28, 0.3);
 }
 
 /* Light Background (White) - Odd indices */
 .program-card-light {
-    background-color: var(--off-white);
-    color: #2c2c2c;
-    border: 2px solid #9b1c1c;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background-color: var(--off-white);
+  color: #2c2c2c;
+  border: 2px solid #9b1c1c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .program-card-light:hover {
-    box-shadow: 0 12px 32px rgba(155, 28, 28, 0.15);
+  box-shadow: 0 12px 32px rgba(155, 28, 28, 0.15);
 }
-
-
 
 /* Program Name */
 .program-name {
-    font-size: 2rem;
-    margin: 0 0 1rem 0;
-    font-family: 'MicroFLF-Bold', sans-serif;
+  font-size: 2rem;
+  margin: 0 0 1rem 0;
+  font-family: "MicroFLF-Bold", sans-serif;
 }
 
 .program-card-colored .program-name {
-    color: var(--off-white);
+  color: var(--off-white);
 }
 
 /* Program Description */
 .program-description {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin: 0 0 1.5rem 0;
-    font-family: 'MicroFLF', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 1.5rem 0;
+  font-family: "MicroFLF", sans-serif;
 }
 
 .program-card-colored .program-description {
-    color: white;
+  color: white;
 }
 
 .program-card-light .program-description {
-    color: black;
+  color: black;
 }
 
 /* Skill Level Section */
 .program-skill-level {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-family: 'MicroFLF', sans-serif;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  font-family: "MicroFLF", sans-serif;
 }
 
 .skill-level-label {
-    font-family: 'MicroFLF-Bold', sans-serif;
+  font-family: "MicroFLF-Bold", sans-serif;
 }
 
 .program-card-colored .skill-level-label {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .program-card-light .skill-level-label {
-    color: #9b1c1c;
+  color: #9b1c1c;
 }
 
 .program-card-colored .skill-level-value {
-    color: #e0e0e0;
+  color: #e0e0e0;
 }
 
 .program-card-light .skill-level-value {
-    color: #666;
+  color: #666;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .program-card {
-        padding: 2rem;
-        border-radius: 28px;
-    }
+  .program-card {
+    padding: 2rem;
+    border-radius: 28px;
+  }
 
-    .program-name {
-        font-size: 1.75rem;
-    }
+  .program-name {
+    font-size: 1.75rem;
+  }
 
-    .program-description {
-        font-size: 1rem;
-    }
+  .program-description {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 576px) {
-    .program-card {
-        padding: 1.5rem;
-        border-radius: 24px;
-    }
+  .program-card {
+    padding: 1.5rem;
+    border-radius: 24px;
+  }
 
-    .program-name {
-        font-size: 1.5rem;
-        margin-bottom: 0.75rem;
-    }
+  .program-name {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
 
-    .program-description {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-    }
+  .program-description {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
 
-    .program-skill-level {
-        font-size: 0.9rem;
-    }
+  .program-skill-level {
+    font-size: 0.9rem;
+  }
 }
