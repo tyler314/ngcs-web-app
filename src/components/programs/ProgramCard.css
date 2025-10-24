@@ -1,12 +1,14 @@
 /* Base Program Card - Bubble Style */
 .program-card {
   border-radius: 32px;
-  padding: 2.5rem;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  font-family: "MicroFLF", sans-serif;
+  padding: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'MicroFLF', sans-serif;
   text-align: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .program-card:hover {
@@ -27,7 +29,7 @@
 
 /* Light Background (White) - Odd indices */
 .program-card-light {
-  background-color: var(--off-white);
+  background-color: #ffffff;
   color: #2c2c2c;
   border: 2px solid #9b1c1c;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -37,15 +39,17 @@
   box-shadow: 0 12px 32px rgba(155, 28, 28, 0.15);
 }
 
+/* Main card content */
+.program-card-content {
+  padding: 2.5rem;
+  position: relative;
+}
+
 /* Program Name */
 .program-name {
   font-size: 2rem;
   margin: 0 0 1rem 0;
-  font-family: "MicroFLF-Bold", sans-serif;
-}
-
-.program-card-colored .program-name {
-  color: var(--off-white);
+  font-family: 'MicroFLF-Bold', sans-serif;
 }
 
 /* Program Description */
@@ -53,15 +57,15 @@
   font-size: 1.1rem;
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
-  font-family: "MicroFLF", sans-serif;
+  font-family: 'MicroFLF', sans-serif;
 }
 
 .program-card-colored .program-description {
-  color: white;
+  color: #f0f0f0;
 }
 
 .program-card-light .program-description {
-  color: black;
+  color: #555;
 }
 
 /* Skill Level Section */
@@ -71,11 +75,12 @@
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  font-family: "MicroFLF", sans-serif;
+  font-family: 'MicroFLF', sans-serif;
+  margin-bottom: 1rem;
 }
 
 .skill-level-label {
-  font-family: "MicroFLF-Bold", sans-serif;
+  font-family: 'MicroFLF-Bold', sans-serif;
 }
 
 .program-card-colored .skill-level-label {
@@ -94,10 +99,241 @@
   color: #666;
 }
 
+/* Expand indicator (arrow) */
+.expand-indicator {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  user-select: none;
+}
+
+.program-card-colored .expand-indicator {
+  color: #ffffff;
+}
+
+.program-card-light .expand-indicator {
+  color: #9b1c1c;
+}
+
+/* Expanded content container */
+.program-card-expanded {
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.program-card-light .program-card-expanded {
+  border-top: 2px solid rgba(155, 28, 28, 0.2);
+}
+
+.program-card-expanded-content {
+  padding: 2rem 2.5rem;
+  text-align: left;
+}
+
+/* Hero Image */
+.hero-image-container {
+  width: 100%;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-image-loading {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'MicroFLF', sans-serif;
+  opacity: 0.7;
+}
+
+/* Option 3: Background Image with Overlay */
+.background-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.background-image-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.program-card.has-background .program-card-content,
+.program-card.has-background .program-card-expanded-content {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.program-card.has-background.program-card-light {
+  color: #ffffff;
+}
+
+.program-card.has-background.program-card-light .program-name,
+.program-card.has-background.program-card-light .program-description,
+.program-card.has-background.program-card-light .skill-level-label,
+.program-card.has-background.program-card-light .skill-level-value,
+.program-card.has-background.program-card-light .expand-indicator,
+.program-card.has-background.program-card-light .expanded-section h3,
+.program-card.has-background.program-card-light .expanded-section p,
+.program-card.has-background.program-card-light .expanded-section li {
+  color: #ffffff;
+}
+
+/* Option 2: Carousel */
+.carousel-container-expanded {
+  position: relative;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 400px;
+  background: #000;
+}
+
+.carousel-image-expanded {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.carousel-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.carousel-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
+}
+
+.carousel-dot.active {
+  background: #ffffff;
+}
+
+/* Expanded sections */
+.expanded-section {
+  margin-bottom: 1.5rem;
+}
+
+.expanded-section h3 {
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem 0;
+  font-family: 'MicroFLF-Bold', sans-serif;
+}
+
+.program-card-colored .expanded-section h3 {
+  color: #ffffff;
+}
+
+.program-card-light .expanded-section h3 {
+  color: #9b1c1c;
+}
+
+.expanded-section p {
+  margin: 0.5rem 0;
+  font-family: 'MicroFLF', sans-serif;
+  line-height: 1.5;
+}
+
+.expanded-section ul {
+  list-style-position: inside;
+  padding-left: 0;
+  margin: 0.5rem 0;
+}
+
+.expanded-section li {
+  margin: 0.5rem 0;
+  font-family: 'MicroFLF', sans-serif;
+}
+
+.program-card-colored .expanded-section p,
+.program-card-colored .expanded-section li {
+  color: #f0f0f0;
+}
+
+.program-card-light .expanded-section p,
+.program-card-light .expanded-section li {
+  color: #555;
+}
+
+/* CTA Button */
+.cta-button {
+  background-color: #9b1c1c;
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-family: 'MicroFLF-Bold', sans-serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.program-card-light .cta-button {
+  background-color: #9b1c1c;
+}
+
+.program-card-colored .cta-button {
+  background-color: #ffffff;
+  color: #9b1c1c;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+.program-card-colored .cta-button:hover {
+  background-color: #f5f5f5;
+}
+
+.program-card-light .cta-button:hover {
+  background-color: #7a1616;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .program-card {
+  .program-card-content {
     padding: 2rem;
+  }
+
+  .program-card {
     border-radius: 28px;
   }
 
@@ -108,11 +344,30 @@
   .program-description {
     font-size: 1rem;
   }
+
+  .program-card-expanded-content {
+    padding: 1.5rem 2rem;
+  }
+
+  .expanded-section h3 {
+    font-size: 1.25rem;
+  }
+
+  .hero-image {
+    max-height: 300px;
+  }
+
+  .carousel-container-expanded {
+    height: 300px;
+  }
 }
 
 @media (max-width: 576px) {
-  .program-card {
+  .program-card-content {
     padding: 1.5rem;
+  }
+
+  .program-card {
     border-radius: 24px;
   }
 
@@ -128,5 +383,41 @@
 
   .program-skill-level {
     font-size: 0.9rem;
+  }
+
+  .program-card-expanded-content {
+    padding: 1rem 1.5rem;
+  }
+
+  .expanded-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .cta-button {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .hero-image {
+    max-height: 250px;
+  }
+
+  .hero-image-container {
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .carousel-container-expanded {
+    height: 250px;
+    border-radius: 12px;
+  }
+
+  .carousel-dots {
+    bottom: 0.5rem;
+  }
+
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
   }
 }
