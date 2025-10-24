@@ -42,7 +42,7 @@ export default function Instructors() {
       setError(null);
 
       try {
-        const res = await fetch(INSTRUCTORS_API, { cache: "no-store" });
+        const res = await fetch(INSTRUCTORS_API);
 
         if (!res.ok) {
           throw new Error(`Failed to fetch instructors: ${res.status}`);

@@ -39,7 +39,7 @@ export function useContactInfo() {
       setError(null);
 
       try {
-        const res = await fetch(CONTACT_INFO_API, { cache: "no-store" });
+        const res = await fetch(CONTACT_INFO_API);
 
         if (!res.ok) {
           throw new Error(`Failed to fetch contact info: ${res.status}`);

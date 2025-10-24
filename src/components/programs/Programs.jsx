@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import React, { useState, useEffect } from "react";
 import "./Programs.css";
 import ProgramCard from "./ProgramCard";
 import Header from "../header/Header";
@@ -10,81 +9,64 @@ export default function Programs() {
   const [programs, setPrograms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  function normalizeProgram(item) {
-    if (!item || typeof item !== "object") return null;
-
-    const id = item.id || uuidv4();
-    const name = item.name ?? "Unnamed Program";
-    const description = item.description ?? "";
-    const skillLevel = item.skillLevel ?? "All Levels";
-
-    return { id, name, description, skillLevel };
-  }
+  const [expandedProgram, setExpandedProgram] = useState(null);
 
   useEffect(() => {
-    let isMounted = true;
-
-    async function loadPrograms() {
-      setLoading(true);
-      setError(null);
-
+    const fetchPrograms = async () => {
       try {
-        const res = await fetch(PROGRAMS_API, { cache: "no-store" });
+        setLoading(true);
+        const response = await fetch(PROGRAMS_API);
+        if (!response.ok) throw new Error("Failed to fetch programs");
 
-        if (!res.ok) {
-          throw new Error(`Failed to fetch programs: ${res.status}`);
-        }
-
-        const data = await res.json();
-        const list = Array.isArray(data) ? data : data?.programs || [];
-        const normalized = list.map(normalizeProgram).filter(Boolean);
-
-        if (isMounted) {
-          setPrograms(normalized);
-        }
-      } catch (e) {
-        console.error("Failed to load programs:", e);
-        if (isMounted) {
-          setError(e.message);
-        }
+        const data = await response.json();
+        setPrograms(data);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching programs:", err);
+        setError(err.message);
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        setLoading(false);
       }
-    }
-
-    loadPrograms();
-
-    return () => {
-      isMounted = false;
     };
+
+    fetchPrograms();
   }, []);
 
-  const listToRender = programs.length > 0 ? programs : [];
+  // 🔹 Early returns for clarity
+  if (loading) {
+    return <div className="programs-loading">Loading programs…</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="programs-error">Failed to load programs: {error}</div>
+    );
+  }
+
+  if (programs.length === 0) {
+    return <div className="programs-loading">No programs available.</div>;
+  }
 
   return (
-    <div
-      className="programs-page-wrapper"
-      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
-    >
+    <div className="programs-page-wrapper">
       <Header />
-      <section className="programs-container" style={{ flex: "1 0 auto" }}>
+      <section className="programs-container">
         <div className="programs-header">
-          <h1>Programs</h1>
-          <p>Choose your path and start training today</p>
+          <h1>Our Programs</h1>
+          <p>Explore our diverse range of educational programs</p>
         </div>
 
-        {loading && <div className="programs-loading">Loading programs…</div>}
-
-        {error && !loading && (
-          <div className="programs-error">Failed to load programs.</div>
-        )}
-
         <div className="programs-list">
-          {listToRender.map((program, index) => (
-            <ProgramCard key={program.id} program={program} index={index} />
+          {programs.map((program, index) => (
+            <ProgramCard
+              key={program.id || index}
+              program={program}
+              index={index}
+              isExpanded={expandedProgram === index}
+              onToggle={() =>
+                setExpandedProgram(expandedProgram === index ? null : index)
+              }
+            />
           ))}
         </div>
       </section>
