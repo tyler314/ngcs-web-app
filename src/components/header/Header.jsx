@@ -4,11 +4,17 @@ import { NavLink } from "react-router-dom";
 import "./Header.css";
 import { Menu, IconButton, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Socials, PhoneContact, useIsMobile } from "../../common/commonUtils";
+import {
+  Socials,
+  PhoneContact,
+  useIsMobile,
+  useIsTablet,
+} from "../../common/commonUtils";
 import { navTabsData } from "../../common/constants";
 
 function NavigationTabs(props) {
   const { isMobile } = useIsMobile();
+  const { isTablet } = useIsTablet();
 
   const navTabs = navTabsData.map((tab) => ({
     ...tab,
@@ -18,7 +24,7 @@ function NavigationTabs(props) {
         : props.className,
   }));
 
-  return isMobile ? (
+  return isMobile || isTablet ? (
     navTabs.map((item, index) => (
       <MenuItem key={index} className={item.className}>
         <NavLink to={item.path} exact>
@@ -95,20 +101,9 @@ function BannerSocialComponent() {
   );
 }
 
-// function TrialButtonHeader() {
-//   return (
-//     <div className="banner-waiver">
-//       <NavLink to="/free-trial" className="banner-nav-link">
-//         Click Here for a Free Week Trial
-//       </NavLink>
-//     </div>
-//   );
-// }
-
 function Banner() {
   return (
     <div className="banner-content">
-      {/*<TrialButtonHeader />*/}
       <BannerSocialComponent />
     </div>
   );

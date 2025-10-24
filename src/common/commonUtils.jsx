@@ -179,11 +179,29 @@ const useIsMobile = () => {
   return { isMobile };
 };
 
+const useIsTablet = () => {
+  const [isTablet, setIsTablet] = useState(false);
+
+  useEffect(() => {
+    const checkDeviceType = () => {
+      setIsTablet(window.innerWidth < 1000);
+    };
+
+    checkDeviceType();
+    window.addEventListener("resize", checkDeviceType);
+
+    return () => window.removeEventListener("resize", checkDeviceType);
+  }, []);
+
+  return { isTablet };
+};
+
 export {
   Socials,
   PhoneContact,
   InfiniteCarousel,
   PhotoGrid,
   useIsMobile,
+  useIsTablet,
   useContactInfo,
 };

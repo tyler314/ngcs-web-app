@@ -200,15 +200,18 @@
 }
 
 .mobile-tab a {
-  font-weight: 400;
-  color: #000000;
-  text-decoration: none;
-  font-family: "MicroFLF-Bold", serif;
-  font-size: 24px;
+  all: unset;
+  font-family: "MicroFLF-Bold", serif !important;
+  font-size: 24px !important;
+  color: #000 !important;
+  text-decoration: none !important;
+  display: block;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
 }
 
 .mobile-tab a:hover {
-  color: #70766a;
+  color: #70766a !important;
 }
 
 .mobile-tab a:active {
