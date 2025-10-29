@@ -1,12 +1,16 @@
 /* Base Program Card - Bubble Style */
 .program-card {
   border-radius: 32px;
-  padding: 2.5rem;
+  padding: 0;
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
   font-family: "MicroFLF", sans-serif;
   text-align: center;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
 .program-card:hover {
@@ -27,7 +31,7 @@
 
 /* Light Background (White) - Odd indices */
 .program-card-light {
-  background-color: var(--off-white);
+  background-color: #ffffff;
   color: #2c2c2c;
   border: 2px solid #9b1c1c;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -37,15 +41,17 @@
   box-shadow: 0 12px 32px rgba(155, 28, 28, 0.15);
 }
 
+/* Main card content */
+.program-card-content {
+  padding: 2.5rem;
+  position: relative;
+}
+
 /* Program Name */
 .program-name {
   font-size: 2rem;
   margin: 0 0 1rem 0;
   font-family: "MicroFLF-Bold", sans-serif;
-}
-
-.program-card-colored .program-name {
-  color: var(--off-white);
 }
 
 /* Program Description */
@@ -57,11 +63,11 @@
 }
 
 .program-card-colored .program-description {
-  color: white;
+  color: #f0f0f0;
 }
 
 .program-card-light .program-description {
-  color: black;
+  color: #555;
 }
 
 /* Skill Level Section */
@@ -72,6 +78,7 @@
   justify-content: center;
   font-size: 1rem;
   font-family: "MicroFLF", sans-serif;
+  margin-bottom: 1rem;
 }
 
 .skill-level-label {
@@ -94,10 +101,286 @@
   color: #666;
 }
 
+/* Expand indicator (arrow) */
+.expand-indicator {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  user-select: none;
+}
+
+.program-card-colored .expand-indicator {
+  color: #ffffff;
+}
+
+.program-card-light .expand-indicator {
+  color: #9b1c1c;
+}
+
+/* Expanded content container */
+.program-card-expanded {
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.program-card-light .program-card-expanded {
+  border-top: 2px solid rgba(155, 28, 28, 0.2);
+}
+
+.program-card-expanded-content {
+  padding: 2rem 2.5rem;
+  text-align: left;
+}
+
+/* Layout: Horizontal (default) - image on top */
+.layout-horizontal {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Layout: Vertical - Column with Row inside */
+.layout-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Vertical Row - holds text and picture side by side */
+.vertical-row {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.vertical-row .expanded-text-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.vertical-row .hero-image-container {
+  flex-shrink: 0;
+}
+
+/* Layout: Background - full background image */
+.layout-background {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Background image overlay styling */
+.background-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.background-image-overlay::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+.program-card.has-background .program-card-content,
+.program-card.has-background .program-card-expanded-content {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.program-card.has-background.program-card-light {
+  color: #ffffff;
+}
+
+.program-card.has-background.program-card-light .program-name,
+.program-card.has-background.program-card-light .program-description,
+.program-card.has-background.program-card-light .skill-level-label,
+.program-card.has-background.program-card-light .skill-level-value,
+.program-card.has-background.program-card-light .expand-indicator,
+.program-card.has-background.program-card-light .expanded-section h3,
+.program-card.has-background.program-card-light .expanded-section p,
+.program-card.has-background.program-card-light .expanded-section li {
+  color: #ffffff;
+}
+
+/* Hero Image - Horizontal (default on top) */
+.hero-image-container.hero-horizontal {
+  width: 100%;
+  margin-bottom: 2rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-horizontal .hero-image {
+  width: 100%;
+  height: auto;
+  max-height: 400px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hero Image - Vertical (on right side, centered) */
+.hero-image-container.hero-vertical {
+  width: 300px;
+  height: 500px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  order: 2;
+}
+
+.hero-vertical .hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Hero Image - Vertical aspect ratio on small screens (displays horizontally but with vertical dimensions) */
+.hero-image-container.hero-vertical-small-screen {
+  width: 100%;
+  max-width: 300px;
+  height: 500px;
+  margin: 0 auto 2rem auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-vertical-small-screen .hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Text content wrapper */
+.expanded-text-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Expanded sections */
+.expanded-section {
+  margin-bottom: 1.5rem;
+}
+
+.expanded-section h3 {
+  font-size: 1.5rem;
+  margin: 0 0 0.75rem 0;
+  font-family: "MicroFLF-Bold", sans-serif;
+}
+
+.program-card-colored .expanded-section h3 {
+  color: #ffffff;
+}
+
+.program-card-light .expanded-section h3 {
+  color: #9b1c1c;
+}
+
+.expanded-section p {
+  margin: 0.5rem 0;
+  font-family: "MicroFLF", sans-serif;
+  line-height: 1.5;
+}
+
+.expanded-section ul {
+  list-style-position: inside;
+  padding-left: 0;
+  margin: 0.5rem 0;
+}
+
+.expanded-section li {
+  margin: 0.5rem 0;
+  font-family: "MicroFLF", sans-serif;
+}
+
+.program-card-colored .expanded-section p,
+.program-card-colored .expanded-section li {
+  color: #f0f0f0;
+}
+
+.program-card-light .expanded-section p,
+.program-card-light .expanded-section li {
+  color: #555;
+}
+
+/* CTA Button */
+.cta-button {
+  background-color: #9b1c1c;
+  color: #ffffff;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-family: "MicroFLF-Bold", sans-serif;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.program-card-light .cta-button {
+  background-color: #9b1c1c;
+}
+
+.program-card-colored .cta-button {
+  background-color: #ffffff;
+  color: #9b1c1c;
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+.program-card-colored .cta-button:hover {
+  background-color: #f5f5f5;
+}
+
+.program-card-light .cta-button:hover {
+  background-color: #7a1616;
+}
+
 /* Responsive adjustments */
+@media (max-width: 968px) {
+  /* Switch vertical layout to horizontal on medium screens */
+  .layout-vertical {
+    flex-direction: column;
+  }
+
+  .hero-image-container.hero-vertical {
+    width: 100%;
+    height: auto;
+    order: 0;
+    margin-bottom: 2rem;
+  }
+
+  .hero-vertical .hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+  }
+}
+
 @media (max-width: 768px) {
-  .program-card {
+  .program-card-content {
     padding: 2rem;
+  }
+
+  .program-card {
     border-radius: 28px;
   }
 
@@ -108,11 +391,26 @@
   .program-description {
     font-size: 1rem;
   }
+
+  .program-card-expanded-content {
+    padding: 1.5rem 2rem;
+  }
+
+  .expanded-section h3 {
+    font-size: 1.25rem;
+  }
+
+  .hero-horizontal .hero-image {
+    max-height: 300px;
+  }
 }
 
 @media (max-width: 576px) {
-  .program-card {
+  .program-card-content {
     padding: 1.5rem;
+  }
+
+  .program-card {
     border-radius: 24px;
   }
 
@@ -129,4 +427,353 @@
   .program-skill-level {
     font-size: 0.9rem;
   }
+
+  .program-card-expanded-content {
+    padding: 1rem 1.5rem;
+  }
+
+  .layout-vertical {
+    gap: 1rem;
+  }
+
+  .expanded-section h3 {
+    font-size: 1.1rem;
+  }
+
+  .cta-button {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .hero-horizontal .hero-image {
+    max-height: 250px;
+  }
+
+  .hero-image-container {
+    border-radius: 12px;
+  }
+
+  .hero-image-container.hero-horizontal {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ===== Schedule Mini-Section Designs ===== */
+
+/* DESIGN 1: Card-based mini-sections (BJJ) */
+.schedule-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.program-card-light .schedule-card {
+  background: rgba(155, 28, 28, 0.05);
+  border-color: rgba(155, 28, 28, 0.2);
+}
+
+.schedule-card-header {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.program-card-light .schedule-card-header {
+  background: rgba(155, 28, 28, 0.1);
+  border-bottom-color: rgba(155, 28, 28, 0.1);
+}
+
+.schedule-card-header h4 {
+  margin: 0;
+  font-family: "MicroFLF-Bold", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.schedule-card-body {
+  padding: 1rem;
+}
+
+.schedule-level-group {
+  margin-bottom: 1rem;
+}
+
+.schedule-level-group:last-child {
+  margin-bottom: 0;
+}
+
+.schedule-level-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-family: "MicroFLF-Bold", sans-serif;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+}
+
+.program-card-light .schedule-level-badge {
+  background: rgba(155, 28, 28, 0.15);
+  color: #9b1c1c;
+}
+
+.schedule-sessions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.schedule-session {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+.program-card-light .schedule-session {
+  background: rgba(155, 28, 28, 0.05);
+}
+
+.day-pill {
+  font-family: "MicroFLF-Bold", sans-serif;
+  font-size: 0.9rem;
+  min-width: 80px;
+}
+
+.time-text {
+  font-family: "MicroFLF", sans-serif;
+  font-size: 0.9rem;
+}
+
+/* DESIGN 2: Accordion mini-sections (Striking) */
+.schedule-accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.schedule-accordion-item {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.program-card-light .schedule-accordion-item {
+  border-color: rgba(155, 28, 28, 0.2);
+}
+
+.schedule-accordion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  transition: background-color 0.3s ease;
+}
+
+.program-card-light .schedule-accordion-header {
+  background: rgba(155, 28, 28, 0.05);
+}
+
+.schedule-accordion-header h4 {
+  margin: 0;
+  font-family: "MicroFLF-Bold", sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.schedule-accordion-body {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.program-card-light .schedule-accordion-body {
+  background: rgba(155, 28, 28, 0.03);
+}
+
+.schedule-level-section {
+  margin-bottom: 1rem;
+}
+
+.schedule-level-section:last-child {
+  margin-bottom: 0;
+}
+
+.schedule-level-title {
+  font-family: "MicroFLF-Bold", sans-serif;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.schedule-session-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  font-family: "MicroFLF", sans-serif;
+  font-size: 0.9rem;
+}
+
+.session-day {
+  font-weight: bold;
+}
+
+.session-divider {
+  opacity: 0.5;
+}
+
+.session-time {
+  opacity: 0.9;
+}
+
+/* DESIGN 3: Pill-based mini-sections (Kids BJJ) */
+.schedule-pills-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.schedule-pill-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.schedule-pill-header {
+  display: flex;
+  align-items: center;
+}
+
+.pill-badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  font-family: "MicroFLF-Bold", sans-serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.program-card-light .pill-badge {
+  background: rgba(155, 28, 28, 0.2);
+  color: #9b1c1c;
+}
+
+.schedule-pill-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.time-pill {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  cursor: default;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.program-card-light .time-pill {
+  background: rgba(155, 28, 28, 0.08);
+  border-color: rgba(155, 28, 28, 0.2);
+}
+
+.time-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.program-card-light .time-pill:hover {
+  background: rgba(155, 28, 28, 0.15);
+  border-color: rgba(155, 28, 28, 0.4);
+}
+
+.time-pill-day {
+  font-family: "MicroFLF-Bold", sans-serif;
+  font-size: 0.85rem;
+  margin-bottom: 0.25rem;
+  opacity: 0.8;
+}
+
+.time-pill-time {
+  font-family: "MicroFLF", sans-serif;
+  font-size: 1rem;
+}
+
+/* DESIGN 4: Simple list (MMA) */
+.schedule-simple-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.schedule-simple-level {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.program-card-light .schedule-simple-level {
+  background: rgba(155, 28, 28, 0.05);
+  border-left-color: rgba(155, 28, 28, 0.5);
+}
+
+.simple-level-badge {
+  font-family: "MicroFLF-Bold", sans-serif;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.simple-sessions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.simple-session {
+  font-family: "MicroFLF", sans-serif;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+  opacity: 0.9;
+}
+
+/* ===== Schedule Description Styling ===== */
+.schedule-description {
+  font-size: 1.08rem;
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: 0.9rem;
+  margin-top: 0.2rem;
+  border-radius: 7px;
+  padding: 0.75em 1em;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffe7b8;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.program-card-light .schedule-description {
+  background: rgba(155, 28, 28, 0.07);
+  color: #9b1c1c;
 }
