@@ -1,6 +1,6 @@
 import React from "react";
 import "./Schedule.css";
-import SchedulePage from "./SchedulePage";
+import ScheduleCalendar from "./ScheduleCalendar";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
 
@@ -12,7 +12,7 @@ export default function Schedule() {
     >
       <Header />
       <div style={{ flex: "1 0 auto", paddingBottom: "0" }}>
-        <SchedulePage />
+        <ScheduleCalendar />
       </div>
       <Footer />
     </div>
