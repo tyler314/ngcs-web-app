@@ -21,11 +21,25 @@ function ScheduleCalendar() {
     const saved = localStorage.getItem("personalSchedule");
     return saved ? JSON.parse(saved) : [];
   });
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     // Save personal schedule to localStorage whenever it changes
     localStorage.setItem("personalSchedule", JSON.stringify(personalSchedule));
   }, [personalSchedule]);
+
+  // Scroll to personal schedule when a class is added
+  const scrollToPersonalSchedule = () => {
+    const element = document.querySelector(".personal-schedule-section");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const showToast = (message) => {
+    setToast(message);
+    setTimeout(() => setToast(null), 3000);
+  };
 
   const TIME_SLOTS = useMemo(() => {
     const allTimes = new Set();
@@ -136,6 +150,8 @@ function ScheduleCalendar() {
       )
     ) {
       setPersonalSchedule([...personalSchedule, classItem]);
+      showToast(`${classItem.program} added to your schedule`);
+      scrollToPersonalSchedule();
     }
   };
 
@@ -148,6 +164,7 @@ function ScheduleCalendar() {
           classKey,
       ),
     );
+    showToast(`${classItem.program} removed from your schedule`);
   };
 
   const isInPersonalSchedule = (classItem) => {
@@ -200,7 +217,7 @@ function ScheduleCalendar() {
     });
 
     return grid;
-  }, [programs, selectedPrograms]);
+  }, [DAYS, TIME_SLOTS, programs, selectedPrograms]);
 
   // Determine which days have classes in personal schedule
   const daysWithClasses = useMemo(() => {
@@ -211,12 +228,31 @@ function ScheduleCalendar() {
     return days;
   }, [personalSchedule]);
 
+  const resetPersonalSchedule = () => {
+    setPersonalSchedule([]);
+  };
+
   if (loading) {
     return <div className="schedule-loading">Loading schedule...</div>;
   }
 
   return (
     <div className="schedule-calendar-container">
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            className="toast-notification"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            {toast}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.div
         className="schedule-filters"
         initial={{ opacity: 0, y: -20 }}
@@ -231,6 +267,7 @@ function ScheduleCalendar() {
             onClick={toggleAll}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            aria-label={allSelected ? "Deselect all programs" : "Select all programs"}
           >
             {allSelected ? "Deselect All" : "Select All"}
           </motion.button>
@@ -250,6 +287,8 @@ function ScheduleCalendar() {
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label={`Toggle ${program.name} filter`}
+              aria-pressed={selectedPrograms.has(program.id)}
             >
               {program.name}
             </motion.button>
@@ -262,11 +301,15 @@ function ScheduleCalendar() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
+        role="table"
+        aria-label="All available classes"
       >
-        <div className="grid-header">
-          <div className="time-column-header">Time</div>
+        <div className="grid-header" role="rowgroup">
+          <div className="time-column-header" role="columnheader">
+            Time
+          </div>
           {DAYS.map((day) => (
-            <div key={day} className="day-header">
+            <div key={day} className="day-header" role="columnheader">
               {day}
             </div>
           ))}
@@ -279,10 +322,18 @@ function ScheduleCalendar() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, delay: timeIndex * 0.05 }}
+            role="row"
           >
-            <div className="time-cell">{time}</div>
+            <div className="time-cell" role="rowheader">
+              {time}
+            </div>
             {DAYS.map((day) => (
-              <div key={`${day}-${time}`} className="schedule-cell">
+              <div
+                key={`${day}-${time}`}
+                className="schedule-cell"
+                role="gridcell"
+                aria-label={`${day} at ${time}`}
+              >
                 <AnimatePresence mode="popLayout">
                   {scheduleGrid[day][time].map((classItem, index) => {
                     const classKey = `${day}-${time}-${classItem.programId}-${classItem.type}-${classItem.level}-${index}`;
@@ -322,6 +373,8 @@ function ScheduleCalendar() {
           handleClassClick={handleClassClick}
           addToPersonalSchedule={addToPersonalSchedule}
           removeFromPersonalSchedule={removeFromPersonalSchedule}
+          onResetSchedule={resetPersonalSchedule}
+          onShowToast={showToast}
         />
       </motion.div>
     </div>
