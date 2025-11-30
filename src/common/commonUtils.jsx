@@ -145,8 +145,8 @@ function normalizeInstructor(item) {
   const role = item.role ?? "Coach";
   const bio = item.bio ?? "";
   const imgSrc = item.imgSrc
-      ? `${S3_INSTRUCTORS_BUCKET_URL}${item.imgSrc}`
-      : `${S3_INSTRUCTORS_BUCKET_URL}${DEFAULT_INSTRUCTOR_IMAGE}`;
+    ? `${S3_INSTRUCTORS_BUCKET_URL}${item.imgSrc}`
+    : `${S3_INSTRUCTORS_BUCKET_URL}${DEFAULT_INSTRUCTOR_IMAGE}`;
 
   let disciplines = item.disciplines ?? "";
   if (Array.isArray(disciplines)) {
@@ -222,30 +222,30 @@ function Socials(props) {
   if (!contactInfo) return null;
 
   return (
-      <Stack
-          direction="row"
-          spacing={1}
-          alignItems="flex-start"
-          className={props.className}
+    <Stack
+      direction="row"
+      spacing={1}
+      alignItems="flex-start"
+      className={props.className}
+    >
+      <NavLink
+        to={contactInfo.social.facebook}
+        exact
+        className="social-nav-link"
       >
-        <NavLink
-            to={contactInfo.social.facebook}
-            exact
-            className="social-nav-link"
-        >
-          <FacebookOutlinedIcon />
-        </NavLink>
-        <NavLink
-            to={contactInfo.social.instagram}
-            exact
-            className="social-nav-link"
-        >
-          <InstagramIcon />
-        </NavLink>
-        <a href={`mailto:${contactInfo.email}`} className="social-nav-link">
-          <EmailOutlinedIcon />
-        </a>
-      </Stack>
+        <FacebookOutlinedIcon />
+      </NavLink>
+      <NavLink
+        to={contactInfo.social.instagram}
+        exact
+        className="social-nav-link"
+      >
+        <InstagramIcon />
+      </NavLink>
+      <a href={`mailto:${contactInfo.email}`} className="social-nav-link">
+        <EmailOutlinedIcon />
+      </a>
+    </Stack>
   );
 }
 
@@ -255,24 +255,24 @@ function PhoneContact({ displayPhoneNumber = true, className }) {
   if (!contactInfo) return null;
 
   return (
-      <div className={className}>
-        <a href={`tel:${contactInfo.phone.replace(/[^0-9]/g, "")}`}>
-          <Stack
-              direction="row"
-              spacing={1}
-              alignItems="center"
-              className="social-nav-link"
+    <div className={className}>
+      <a href={`tel:${contactInfo.phone.replace(/[^0-9]/g, "")}`}>
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          className="social-nav-link"
+        >
+          <PhoneOutlinedIcon />
+          <div
+            className="header-phone-number"
+            style={{ display: displayPhoneNumber ? "block" : "none" }}
           >
-            <PhoneOutlinedIcon />
-            <div
-                className="header-phone-number"
-                style={{ display: displayPhoneNumber ? "block" : "none" }}
-            >
-              {contactInfo.phone}
-            </div>
-          </Stack>
-        </a>
-      </div>
+            {contactInfo.phone}
+          </div>
+        </Stack>
+      </a>
+    </div>
   );
 }
 
@@ -280,26 +280,26 @@ function InfiniteCarousel() {
   const { images } = useImages();
 
   return (
-      <div className="carousel-container">
-        <motion.div
-            className="carousel-track"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{
-              duration: 50,
-              ease: "linear",
-              repeat: Infinity,
-            }}
-        >
-          {images.map((src, idx) => (
-              <img
-                  src={src}
-                  alt={`carousel-${idx}`}
-                  className="carousel-image"
-                  key={idx}
-              />
-          ))}
-        </motion.div>
-      </div>
+    <div className="carousel-container">
+      <motion.div
+        className="carousel-track"
+        animate={{ x: ["0%", "-50%"] }}
+        transition={{
+          duration: 50,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+      >
+        {images.map((src, idx) => (
+          <img
+            src={src}
+            alt={`carousel-${idx}`}
+            className="carousel-image"
+            key={idx}
+          />
+        ))}
+      </motion.div>
+    </div>
   );
 }
 
@@ -314,45 +314,45 @@ function PhotoGrid() {
   useEffect(() => {
     if (images.length > 0) {
       const shuffled = images
-          .map((value) => ({ value, sort: Math.random() }))
-          .sort((a, b) => a.sort - b.sort)
-          .map(({ value }) => value);
+        .map((value) => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
       setShuffledImages(shuffled);
     }
   }, [images]);
 
   const displayedImages = showAll
-      ? shuffledImages
-      : shuffledImages.slice(0, MAX_VISIBLE_IMAGES);
+    ? shuffledImages
+    : shuffledImages.slice(0, MAX_VISIBLE_IMAGES);
 
   return (
-      <div className="photo-grid-container">
-        <div className={`photo-grid ${isMobile ? "mobile" : "desktop"}`}>
-          {displayedImages.map((src, index) => (
-              <motion.div
-                  className="photo-item"
-                  key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{
-                    duration: 0.6,
-                    delay: isMobile ? index * 0.05 : index * 0.1,
-                  }}
-              >
-                <img src={src} alt={`photo-${index}`} />
-              </motion.div>
-          ))}
-        </div>
-        {shuffledImages.length > MAX_VISIBLE_IMAGES && (
-            <button
-                className="photo-grid-toggle-button"
-                onClick={() => setShowAll((prev) => !prev)}
-            >
-              {showAll ? "Show Less" : "Show More"}
-            </button>
-        )}
+    <div className="photo-grid-container">
+      <div className={`photo-grid ${isMobile ? "mobile" : "desktop"}`}>
+        {displayedImages.map((src, index) => (
+          <motion.div
+            className="photo-item"
+            key={index}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{
+              duration: 0.6,
+              delay: isMobile ? index * 0.05 : index * 0.1,
+            }}
+          >
+            <img src={src} alt={`photo-${index}`} />
+          </motion.div>
+        ))}
       </div>
+      {shuffledImages.length > MAX_VISIBLE_IMAGES && (
+        <button
+          className="photo-grid-toggle-button"
+          onClick={() => setShowAll((prev) => !prev)}
+        >
+          {showAll ? "Show Less" : "Show More"}
+        </button>
+      )}
+    </div>
   );
 }
 
@@ -390,6 +390,30 @@ const useIsTablet = () => {
   return { isTablet };
 };
 
+
+
+// ==================== SCHEDULE UTILS ====================
+
+const parseTime = (t) => {
+  const [time, period] = t.split(" ");
+  let [hours, minutes] = time.split(":").map(Number);
+  if (period === "PM" && hours !== 12) hours += 12;
+  if (period === "AM" && hours === 12) hours = 0;
+  return hours * 60 + minutes;
+};
+
+const generateClassId = (classItem) => {
+  return `${classItem.day}-${classItem.time}-${classItem.programId}-${classItem.type}-${classItem.level}`;
+};
+
+const useCurrentDayIndex = (DAYS) => {
+  return useState(() => {
+    const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+    const index = DAYS.indexOf(today);
+    return index >= 0 ? index : 0;
+  });
+};
+
 export {
   Socials,
   PhoneContact,
@@ -401,4 +425,7 @@ export {
   usePrograms,
   useImages,
   useInstructors,
+  parseTime,
+  generateClassId,
+  useCurrentDayIndex,
 };

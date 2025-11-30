@@ -1,4 +1,3 @@
-import React from "react";
 import { motion, AnimatePresence } from "motion/react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 

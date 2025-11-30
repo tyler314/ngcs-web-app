@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function PillSchedule({ scheduleEntries }) {
   const renderDescription = (desc) =>

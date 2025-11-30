@@ -1,4 +1,3 @@
-import React from "react";
 import "./Instructors.css";
 import {
   S3_INSTRUCTORS_BUCKET_URL,

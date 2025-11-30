@@ -19,21 +19,21 @@ export function ClassCard({
         borderColor: classItem.color.light,
       }}
       layout
-      initial={{ scale: 0, opacity: 0 }}
+      initial={{ opacity: 0, y: 15 }}
       animate={{
-        scale: 1,
         opacity: 1,
+        y: 0,
         zIndex: isExpanded ? 100 : 1,
       }}
-      exit={{ scale: 0, opacity: 0 }}
+      exit={{ opacity: 0, y: 15 }}
       transition={{
         layout: { type: "spring", damping: 25, stiffness: 300 },
-        scale: { type: "spring", stiffness: 500, damping: 30 },
+        default: { duration: 0.3, ease: "easeOut" },
       }}
       whileHover={
         !isExpanded
           ? {
-              scale: 1.05,
+              scale: 1.02,
               boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
             }
           : {}
@@ -108,9 +108,9 @@ export function ClassCard({
                     onAddToPersonal(classItem);
                   }
                 }}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.25 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25, duration: 0.3 }}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

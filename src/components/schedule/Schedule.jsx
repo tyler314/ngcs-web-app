@@ -1,4 +1,3 @@
-import React from "react";
 import "./Schedule.css";
 import ScheduleCalendar from "./ScheduleCalendar";
 import Header from "../header/Header";

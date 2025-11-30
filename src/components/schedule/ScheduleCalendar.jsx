@@ -1,9 +1,14 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { PersonalScheduleGrid } from "./PersonalScheduleGrid";
-import { ClassCard } from "./ClassCard";
+import { PersonalScheduleMobileDay } from "./PersonalScheduleMobileDay";
+import { ScheduleGridView } from "./ScheduleGridView";
+import { ScheduleDayView } from "./ScheduleDayView";
 import { PROGRAMS_API } from "../../common/constants";
+import ViewWeekIcon from "@mui/icons-material/ViewWeek";
+import ViewAgendaIcon from "@mui/icons-material/ViewAgenda";
 import "./Schedule.css";
+import { parseTime, generateClassId } from "../../common/commonUtils";
 
 const PROGRAM_COLORS = {
   bjj: { bg: "#3b82f6", light: "#60a5fa" },
@@ -22,13 +27,33 @@ function ScheduleCalendar() {
     return saved ? JSON.parse(saved) : [];
   });
   const [toast, setToast] = useState(null);
+  const [viewMode, setViewMode] = useState(() => {
+    const saved = localStorage.getItem("scheduleViewMode");
+    return saved || "grid";
+  });
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
 
   useEffect(() => {
-    // Save personal schedule to localStorage whenever it changes
     localStorage.setItem("personalSchedule", JSON.stringify(personalSchedule));
   }, [personalSchedule]);
 
-  // Scroll to personal schedule when a class is added
+  useEffect(() => {
+    localStorage.setItem("scheduleViewMode", viewMode);
+  }, [viewMode]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (mobile && viewMode === "grid") {
+        setViewMode("day");
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [viewMode]);
+
   const scrollToPersonalSchedule = () => {
     const element = document.querySelector(".personal-schedule-section");
     if (element) {
@@ -55,16 +80,10 @@ function ScheduleCalendar() {
       });
     });
 
-    // Sort times chronologically
     return Array.from(allTimes).sort((a, b) => {
-      const parseTime = (t) => {
-        const [time, period] = t.split(" ");
-        let [hours, minutes] = time.split(":").map(Number);
-        if (period === "PM" && hours !== 12) hours += 12;
-        if (period === "AM" && hours === 12) hours = 0;
-        return hours * 60 + minutes;
-      };
-      return parseTime(a) - parseTime(b);
+      return Array.from(allTimes).sort((a, b) => {
+        return parseTime(a) - parseTime(b);
+      });
     });
   }, [programs]);
 
@@ -82,7 +101,6 @@ function ScheduleCalendar() {
       });
     });
 
-    // Sort in standard week order
     const dayOrder = [
       "Monday",
       "Tuesday",
@@ -141,14 +159,8 @@ function ScheduleCalendar() {
   };
 
   const addToPersonalSchedule = (classItem) => {
-    const classKey = `${classItem.day}-${classItem.time}-${classItem.programId}-${classItem.type}-${classItem.level}`;
-    if (
-      !personalSchedule.find(
-        (item) =>
-          `${item.day}-${item.time}-${item.programId}-${item.type}-${item.level}` ===
-          classKey,
-      )
-    ) {
+    const classKey = generateClassId(classItem);
+    if (!personalSchedule.find((item) => generateClassId(item) === classKey)) {
       setPersonalSchedule([...personalSchedule, classItem]);
       showToast(`${classItem.program} added to your schedule`);
       scrollToPersonalSchedule();
@@ -156,27 +168,18 @@ function ScheduleCalendar() {
   };
 
   const removeFromPersonalSchedule = (classItem) => {
-    const classKey = `${classItem.day}-${classItem.time}-${classItem.programId}-${classItem.type}-${classItem.level}`;
+    const classKey = generateClassId(classItem);
     setPersonalSchedule(
-      personalSchedule.filter(
-        (item) =>
-          `${item.day}-${item.time}-${item.programId}-${item.type}-${item.level}` !==
-          classKey,
-      ),
+      personalSchedule.filter((item) => generateClassId(item) !== classKey),
     );
     showToast(`${classItem.program} removed from your schedule`);
   };
 
   const isInPersonalSchedule = (classItem) => {
-    const classKey = `${classItem.day}-${classItem.time}-${classItem.programId}-${classItem.type}-${classItem.level}`;
-    return personalSchedule.some(
-      (item) =>
-        `${item.day}-${item.time}-${item.programId}-${item.type}-${item.level}` ===
-        classKey,
-    );
+    const classKey = generateClassId(classItem);
+    return personalSchedule.some((item) => generateClassId(item) === classKey);
   };
 
-  // Build the schedule grid
   const scheduleGrid = useMemo(() => {
     const grid = {};
     DAYS.forEach((day) => {
@@ -219,7 +222,6 @@ function ScheduleCalendar() {
     return grid;
   }, [DAYS, TIME_SLOTS, programs, selectedPrograms]);
 
-  // Determine which days have classes in personal schedule
   const daysWithClasses = useMemo(() => {
     const days = new Set();
     personalSchedule.forEach((classItem) => {
@@ -259,7 +261,32 @@ function ScheduleCalendar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1>Gym Schedule</h1>
+        <div className="filters-header">
+          <h1>Gym Schedule</h1>
+          {!isMobile && (
+            <div className="view-mode-toggle">
+              <motion.button
+                className={`view-mode-btn ${viewMode === "grid" ? "active" : ""}`}
+                onClick={() => setViewMode("grid")}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                title="Grid view"
+              >
+                <ViewWeekIcon />
+              </motion.button>
+              <motion.button
+                className={`view-mode-btn ${viewMode === "day" ? "active" : ""}`}
+                onClick={() => setViewMode("day")}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                title="Day view"
+              >
+                <ViewAgendaIcon />
+              </motion.button>
+            </div>
+          )}
+        </div>
+
         <h3>Filter Programs</h3>
         <div className="filter-buttons">
           <motion.button
@@ -296,65 +323,30 @@ function ScheduleCalendar() {
         </div>
       </motion.div>
 
-      <motion.div
-        className="schedule-grid"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-        role="table"
-        aria-label="All available classes"
-      >
-        <div className="grid-header" role="rowgroup">
-          <div className="time-column-header" role="columnheader">
-            Time
-          </div>
-          {DAYS.map((day) => (
-            <div key={day} className="day-header" role="columnheader">
-              {day}
-            </div>
-          ))}
-        </div>
-
-        {TIME_SLOTS.map((time, timeIndex) => (
-          <motion.div
-            key={time}
-            className="grid-row"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: timeIndex * 0.05 }}
-            role="row"
-          >
-            <div className="time-cell" role="rowheader">
-              {time}
-            </div>
-            {DAYS.map((day) => (
-              <div
-                key={`${day}-${time}`}
-                className="schedule-cell"
-                role="gridcell"
-                aria-label={`${day} at ${time}`}
-              >
-                <AnimatePresence mode="popLayout">
-                  {scheduleGrid[day][time].map((classItem, index) => {
-                    const classKey = `${day}-${time}-${classItem.programId}-${classItem.type}-${classItem.level}-${index}`;
-                    return (
-                      <ClassCard
-                        key={classKey}
-                        classItem={classItem}
-                        isExpanded={expandedClass === classKey}
-                        onClick={() => handleClassClick(classKey)}
-                        onAddToPersonal={addToPersonalSchedule}
-                        onRemoveFromPersonal={removeFromPersonalSchedule}
-                        isPersonal={isInPersonalSchedule(classItem)}
-                      />
-                    );
-                  })}
-                </AnimatePresence>
-              </div>
-            ))}
-          </motion.div>
-        ))}
-      </motion.div>
+      {/* Schedule Views */}
+      {viewMode === "grid" ? (
+        <ScheduleGridView
+          scheduleGrid={scheduleGrid}
+          DAYS={DAYS}
+          TIME_SLOTS={TIME_SLOTS}
+          expandedClass={expandedClass}
+          handleClassClick={handleClassClick}
+          addToPersonalSchedule={addToPersonalSchedule}
+          removeFromPersonalSchedule={removeFromPersonalSchedule}
+          isInPersonalSchedule={isInPersonalSchedule}
+        />
+      ) : (
+        <ScheduleDayView
+          scheduleGrid={scheduleGrid}
+          DAYS={DAYS}
+          TIME_SLOTS={TIME_SLOTS}
+          expandedClass={expandedClass}
+          handleClassClick={handleClassClick}
+          addToPersonalSchedule={addToPersonalSchedule}
+          removeFromPersonalSchedule={removeFromPersonalSchedule}
+          isInPersonalSchedule={isInPersonalSchedule}
+        />
+      )}
 
       {/* Personal Schedule */}
       <motion.div
@@ -364,18 +356,30 @@ function ScheduleCalendar() {
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <h2 className="personal-schedule-title">My Schedule</h2>
-        <PersonalScheduleGrid
-          personalSchedule={personalSchedule}
-          DAYS={DAYS}
-          TIME_SLOTS={TIME_SLOTS}
-          daysWithClasses={daysWithClasses}
-          expandedClass={expandedClass}
-          handleClassClick={handleClassClick}
-          addToPersonalSchedule={addToPersonalSchedule}
-          removeFromPersonalSchedule={removeFromPersonalSchedule}
-          onResetSchedule={resetPersonalSchedule}
-          onShowToast={showToast}
-        />
+        {isMobile || viewMode === "day" ? (
+          <PersonalScheduleMobileDay
+            personalSchedule={personalSchedule}
+            DAYS={DAYS}
+            expandedClass={expandedClass}
+            handleClassClick={handleClassClick}
+            removeFromPersonalSchedule={removeFromPersonalSchedule}
+            onResetSchedule={resetPersonalSchedule}
+            onShowToast={showToast}
+          />
+        ) : (
+          <PersonalScheduleGrid
+            personalSchedule={personalSchedule}
+            DAYS={DAYS}
+            TIME_SLOTS={TIME_SLOTS}
+            daysWithClasses={daysWithClasses}
+            expandedClass={expandedClass}
+            handleClassClick={handleClassClick}
+            addToPersonalSchedule={addToPersonalSchedule}
+            removeFromPersonalSchedule={removeFromPersonalSchedule}
+            onResetSchedule={resetPersonalSchedule}
+            onShowToast={showToast}
+          />
+        )}
       </motion.div>
     </div>
   );

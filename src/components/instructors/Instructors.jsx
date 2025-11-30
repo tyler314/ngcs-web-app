@@ -1,4 +1,3 @@
-import React from "react";
 import "./Instructors.css";
 import InstructorCard from "./InstructorCard";
 import Header from "../header/Header";

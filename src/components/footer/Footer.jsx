@@ -8,7 +8,6 @@ import {
 import PlaceIcon from "@mui/icons-material/Place";
 import { navTabsData } from "../../common/constants";
 import { NavLink } from "react-router-dom";
-import React from "react";
 
 function NGLogo() {
   return (
