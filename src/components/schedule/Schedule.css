@@ -189,119 +189,7 @@ footer {
   background: #fafbfc;
 }
 
-/* Day View */
-.schedule-day-view {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-.day-view-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem;
-  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  color: white;
-  gap: 1rem;
-}
-
-.day-nav-btn {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-
-.day-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.day-nav-btn:active {
-  transform: scale(0.95);
-}
-
-.day-display {
-  flex: 1;
-  text-align: center;
-}
-
-.current-day {
-  margin: 0 0 0.75rem 0;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-
-.day-indicator {
-  display: flex;
-  justify-content: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-}
-
-.day-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.day-dot.active {
-  background: white;
-  width: 24px;
-  border-radius: 4px;
-}
-
-.day-classes-container {
-  padding: 1.5rem;
-  min-height: 200px;
-}
-
-.classes-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.day-class-card {
-  display: grid;
-  grid-template-columns: 70px 1fr;
-  gap: 1rem;
-  align-items: start;
-  margin-right: 0;
-  padding-right: 1rem;
-}
-
-.class-time-badge {
-  background: #f3f4f6;
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  color: #374151;
-  text-align: center;
-  white-space: nowrap;
-  align-self: center;
-}
-
-.no-classes-message {
-  text-align: center;
-  padding: 2rem;
-  color: #9ca3af;
-  font-size: 1rem;
-}
 
 /* Personal Schedule */
 .personal-schedule-section {
@@ -375,13 +263,7 @@ footer {
   min-width: 150px;
 }
 
-/* Personal Day View */
-.personal-day-view {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+
 
 .personal-schedule-header {
   display: flex;
@@ -562,7 +444,7 @@ footer {
   }
 
   .class-item.expanded {
-    width: 280px;
+    width: 100%;
   }
 
   .schedule-grid {
@@ -631,37 +513,7 @@ footer {
     min-width: 100px;
   }
 
-  /* Day view takes full width on mobile */
-  .schedule-day-view,
-  .personal-day-view {
-    border-radius: 8px;
-  }
 
-  .day-view-header {
-    padding: 1rem;
-    gap: 0.75rem;
-  }
-
-  .current-day {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .day-classes-container {
-    padding: 1rem;
-    min-height: 150px;
-  }
-
-  .day-class-card {
-    grid-template-columns: 60px 1fr;
-    gap: 0.75rem;
-    margin-right: 0;
-  }
-
-  .class-time-badge {
-    padding: 0.4rem 0.5rem;
-    font-size: 0.75rem;
-  }
 
   .personal-schedule-section {
     margin-top: 2rem;
@@ -746,35 +598,7 @@ footer {
     font-size: 0.75rem;
   }
 
-  .day-view-header {
-    padding: 0.75rem;
-  }
 
-  .day-nav-btn {
-    width: 36px;
-    height: 36px;
-  }
-
-  .current-day {
-    font-size: 1.1rem;
-  }
-
-  .day-indicator {
-    gap: 0.3rem;
-  }
-
-  .day-dot.active {
-    width: 20px;
-  }
-
-  .day-classes-container {
-    padding: 0.75rem;
-  }
-
-  .class-time-badge {
-    padding: 0.3rem 0.4rem;
-    font-size: 0.7rem;
-  }
 
   .personal-schedule-section {
     margin-top: 1.5rem;
@@ -795,5 +619,156 @@ footer {
   .toast-notification {
     padding: 0.6rem 0.8rem;
     font-size: 0.85rem;
+  }
+}
+
+/* Accordion View Styles */
+.schedule-accordion-view {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.accordion-item {
+  background: rgba(59, 77, 94, 0.95);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.accordion-item.expanded {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background: rgba(59, 77, 94, 1);
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #e5e7eb;
+  font-family: inherit;
+}
+
+.accordion-header-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.accordion-day-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f3f4f6;
+}
+
+.accordion-dots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.accordion-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.accordion-content {
+  overflow: hidden;
+}
+
+.accordion-content-inner {
+  padding: 0 16px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.accordion-class-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.class-time-col {
+  width: 70px;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #9ca3af;
+  padding-top: 12px;
+  text-align: right;
+}
+
+.class-card-col {
+  flex: 1;
+  min-width: 0;
+  /* Prevents overflow issues */
+}
+
+/* Dark mode adjustments if needed, though mostly using light/glass style */
+@media (prefers-color-scheme: dark) {
+  .accordion-item {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f3f4f6;
+  }
+
+  .accordion-item.expanded {
+    background: rgba(30, 41, 59, 0.95);
+  }
+
+  .accordion-day-name {
+    color: #f3f4f6;
+  }
+
+  .accordion-header {
+    color: #e5e7eb;
+  }
+
+  .class-time-col {
+    color: #9ca3af;
+  }
+}
+
+/* Personal Schedule Accordion Specifics */
+.personal-schedule-accordion-container {
+  width: 100%;
+}
+
+.accordion-item.no-classes {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.accordion-item.no-classes .accordion-day-name {
+  color: #9ca3af;
+}
+
+.accordion-item.no-classes .accordion-header {
+  cursor: default;
+}
+
+/* Dark mode for personal schedule empty state */
+@media (prefers-color-scheme: dark) {
+  .accordion-item.no-classes {
+    background: rgba(30, 41, 59, 0.4);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .accordion-item.no-classes .accordion-day-name {
+    color: #6b7280;
   }
 }

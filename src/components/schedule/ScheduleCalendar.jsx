@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { PersonalScheduleGrid } from "./PersonalScheduleGrid";
-import { PersonalScheduleMobileDay } from "./PersonalScheduleMobileDay";
+import { PersonalScheduleAccordionView } from "./PersonalScheduleAccordionView";
 import { ScheduleGridView } from "./ScheduleGridView";
-import { ScheduleDayView } from "./ScheduleDayView";
+import { ScheduleAccordionView } from "./ScheduleAccordionView";
 import { PROGRAMS_API } from "../../common/constants";
 import ViewWeekIcon from "@mui/icons-material/ViewWeek";
 import ViewAgendaIcon from "@mui/icons-material/ViewAgenda";
@@ -81,9 +81,7 @@ function ScheduleCalendar() {
     });
 
     return Array.from(allTimes).sort((a, b) => {
-      return Array.from(allTimes).sort((a, b) => {
-        return parseTime(a) - parseTime(b);
-      });
+      return parseTime(a) - parseTime(b);
     });
   }, [programs]);
 
@@ -336,7 +334,7 @@ function ScheduleCalendar() {
           isInPersonalSchedule={isInPersonalSchedule}
         />
       ) : (
-        <ScheduleDayView
+        <ScheduleAccordionView
           scheduleGrid={scheduleGrid}
           DAYS={DAYS}
           TIME_SLOTS={TIME_SLOTS}
@@ -357,7 +355,7 @@ function ScheduleCalendar() {
       >
         <h2 className="personal-schedule-title">My Schedule</h2>
         {isMobile || viewMode === "day" ? (
-          <PersonalScheduleMobileDay
+          <PersonalScheduleAccordionView
             personalSchedule={personalSchedule}
             DAYS={DAYS}
             expandedClass={expandedClass}
