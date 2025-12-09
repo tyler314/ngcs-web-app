@@ -2,6 +2,7 @@ import "./Instructors.css";
 import InstructorCard from "./InstructorCard";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
+import SEO from "../../common/SEO";
 import { useInstructors } from "../../common/commonUtils";
 
 export default function Instructors() {
@@ -12,6 +13,11 @@ export default function Instructors() {
       className="instructors-page-wrapper"
       style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
     >
+      <SEO
+        title="Instructors | Neutral Ground Combat Sports"
+        description="Meet our world-class instructors at Neutral Ground Combat Sports. BJJ black belts, pro MMA fighters, and expert striking coaches dedicated to your progress."
+        canonical="https://www.westbendbjj.com/instructors"
+      />
       <Header />
       <section className="instructors-container" style={{ flex: "1 0 auto" }}>
         <div className="instructors-header">

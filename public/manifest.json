@@ -1,6 +1,13 @@
 {
   "short_name": "NGCS",
-  "name": "Create React App Sample",
+  "name": "Neutral Ground Combat Sports",
+  "description": "West Bend, Wisconsin's premier martial arts academy offering Brazilian Jiu-Jitsu, MMA, Kickboxing, and Boxing classes for all skill levels.",
+  "lang": "en-US",
+  "categories": [
+    "sports",
+    "fitness",
+    "health"
+  ],
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,26 +17,20 @@
     {
       "src": "nglogo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "nglogo512.png",
       "type": "image/png",
-      "sizes": "512x512"
-    },
-    {
-      "src": "nglogo192.png",
-      "type": "image/x-icon",
-      "sizes": "192x192"
-    },
-    {
-      "src": "nglogo512.png",
-      "type": "image/x-icon",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "theme_color": "#000000",
   "background_color": "#ffffff"
 }

@@ -1,3 +1,13 @@
-# https://www.robotstxt.org/robotstxt.html
+# Robots.txt for Neutral Ground Combat Sports
+# https://www.westbendbjj.com
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemap location
+Sitemap: https://www.westbendbjj.com/sitemap.xml
+
+# Crawl delay (optional, be nice to the server)
+Crawl-delay: 1

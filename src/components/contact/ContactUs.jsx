@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
+import SEO from "../../common/SEO";
 import PlaceIcon from "@mui/icons-material/Place";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -30,6 +31,11 @@ function ContactUs() {
   return (
     <div className="contact-page-wrapper">
       <Header />
+      <SEO
+        title="Contact Us | Neutral Ground Combat Sports"
+        description="Get in touch with Neutral Ground Combat Sports in West Bend, WI. Call, email, or visit us to start your martial arts journey."
+        canonical="https://www.westbendbjj.com/contact"
+      />
 
       <div className="contact-content">
         <Container className="contact-container py-5">

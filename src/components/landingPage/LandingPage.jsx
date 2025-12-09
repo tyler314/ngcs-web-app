@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { BANNER_IMAGE_URI, GYM_SCHEDULE } from "../../common/constants";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
+import SEO from "../../common/SEO";
 import { PhotoGrid, useContactInfo } from "../../common/commonUtils";
 import "./LandingPage.css";
 
@@ -52,6 +53,9 @@ export default function LandingPage() {
   return (
     <div className="landing-page-wrapper">
       <Header isHomePage={true} />
+      <SEO
+        title="Neutral Ground Combat Sports | MMA, BJJ, Kickboxing & Boxing in West Bend, WI"
+      />
       <Title />
       <img className="read-more-artist-image" src={BANNER_IMAGE_URI} alt="" />
       <section className="mission-statement">

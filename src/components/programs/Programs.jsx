@@ -3,6 +3,7 @@ import "./Programs.css";
 import ProgramCard from "./ProgramCard";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
+import SEO from "../../common/SEO";
 import { usePrograms } from "../../common/commonUtils";
 
 export default function Programs() {
@@ -27,6 +28,11 @@ export default function Programs() {
   return (
     <div className="programs-page-wrapper">
       <Header />
+      <SEO
+        title="Programs | Neutral Ground Combat Sports"
+        description="Explore our martial arts programs including Brazilian Jiu-Jitsu, MMA, Kickboxing, Boxing, and Kids classes. Training for all ages and skill levels."
+        canonical="https://www.westbendbjj.com/programs"
+      />
       <section className="programs-container">
         <div className="programs-header">
           <h1>Our Programs</h1>
