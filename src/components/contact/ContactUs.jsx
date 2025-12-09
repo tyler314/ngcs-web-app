@@ -37,17 +37,15 @@ function ContactUs() {
             <Col md={8} lg={6}>
               <h1 className="text-center mb-4 contact-title">Contact Us</h1>
               <p className="text-center lead mb-5 contact-subtitle">
-                {
-                  contactInfo.intro ? contactInfo.intro :
-                      (
-                          <>
-                            Have questions? We'd love to hear from you. Reach out to us
-                            using any of the methods below.
-                            Or stop by at the beginning of any class.
-                            See you on the mats!
-                          </>
-                      )
-                }
+                {contactInfo.intro ? (
+                  contactInfo.intro
+                ) : (
+                  <>
+                    Have questions? We'd love to hear from you. Reach out to us
+                    using any of the methods below. Or stop by at the beginning
+                    of any class. See you on the mats!
+                  </>
+                )}
               </p>
             </Col>
           </Row>

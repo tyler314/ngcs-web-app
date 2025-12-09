@@ -3,7 +3,7 @@ import "./Programs.css";
 import ProgramCard from "./ProgramCard";
 import Header from "../header/Header";
 import Footer from "../footer/Footer";
-import { usePrograms} from "../../common/commonUtils";
+import { usePrograms } from "../../common/commonUtils";
 
 export default function Programs() {
   const [expandedProgram, setExpandedProgram] = useState(null);
@@ -16,7 +16,7 @@ export default function Programs() {
 
   if (error) {
     return (
-        <div className="programs-error">Failed to load programs: {error}</div>
+      <div className="programs-error">Failed to load programs: {error}</div>
     );
   }
 
@@ -25,29 +25,29 @@ export default function Programs() {
   }
 
   return (
-      <div className="programs-page-wrapper">
-        <Header />
-        <section className="programs-container">
-          <div className="programs-header">
-            <h1>Our Programs</h1>
-            <p>Explore our diverse range of educational programs</p>
-          </div>
+    <div className="programs-page-wrapper">
+      <Header />
+      <section className="programs-container">
+        <div className="programs-header">
+          <h1>Our Programs</h1>
+          <p>Explore our diverse range of educational programs</p>
+        </div>
 
-          <div className="programs-list">
-            {programs.map((program, index) => (
-                <ProgramCard
-                    key={program.id || index}
-                    program={program}
-                    index={index}
-                    isExpanded={expandedProgram === index}
-                    onToggle={() =>
-                        setExpandedProgram(expandedProgram === index ? null : index)
-                    }
-                />
-            ))}
-          </div>
-        </section>
-        <Footer />
-      </div>
+        <div className="programs-list">
+          {programs.map((program, index) => (
+            <ProgramCard
+              key={program.id || index}
+              program={program}
+              index={index}
+              isExpanded={expandedProgram === index}
+              onToggle={() =>
+                setExpandedProgram(expandedProgram === index ? null : index)
+              }
+            />
+          ))}
+        </div>
+      </section>
+      <Footer />
+    </div>
   );
 }

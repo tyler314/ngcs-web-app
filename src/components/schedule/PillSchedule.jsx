@@ -1,4 +1,3 @@
-
 export default function PillSchedule({ scheduleEntries }) {
   const renderDescription = (desc) =>
     desc ? <p className="schedule-description">{desc}</p> : null;

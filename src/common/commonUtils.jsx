@@ -7,7 +7,7 @@ import {
   PROGRAMS_API,
   INSTRUCTORS_API,
   S3_INSTRUCTORS_BUCKET_URL,
-  DEFAULT_INSTRUCTOR_IMAGE
+  DEFAULT_INSTRUCTOR_IMAGE,
 } from "./constants";
 import { useContactInfo } from "./useContactInfo";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
@@ -101,7 +101,8 @@ function useInstructors() {
 
       try {
         const res = await fetch(INSTRUCTORS_API);
-        if (!res.ok) throw new Error(`Failed to fetch instructors: ${res.status}`);
+        if (!res.ok)
+          throw new Error(`Failed to fetch instructors: ${res.status}`);
 
         const data = await res.json();
         const list = Array.isArray(data) ? data : data?.instructors || [];
@@ -389,8 +390,6 @@ const useIsTablet = () => {
 
   return { isTablet };
 };
-
-
 
 // ==================== SCHEDULE UTILS ====================
 

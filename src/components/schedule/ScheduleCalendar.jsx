@@ -292,7 +292,9 @@ function ScheduleCalendar() {
             onClick={toggleAll}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            aria-label={allSelected ? "Deselect all programs" : "Select all programs"}
+            aria-label={
+              allSelected ? "Deselect all programs" : "Select all programs"
+            }
           >
             {allSelected ? "Deselect All" : "Select All"}
           </motion.button>

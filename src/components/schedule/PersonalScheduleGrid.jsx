@@ -100,13 +100,14 @@ export function PersonalScheduleGrid({
                     : "Show all time slots"
                 }
               >
-                {showAllTimeSlots
-                  ? "Hide Empty Slots"
-                  : "View All Time Slots"}
+                {showAllTimeSlots ? "Hide Empty Slots" : "View All Time Slots"}
               </motion.button>
             </div>
             <div className="schedule-info">
-              <span className="class-count">{personalSchedule.length} class{personalSchedule.length !== 1 ? "es" : ""} selected</span>
+              <span className="class-count">
+                {personalSchedule.length} class
+                {personalSchedule.length !== 1 ? "es" : ""} selected
+              </span>
             </div>
           </div>
 
@@ -140,7 +141,9 @@ export function PersonalScheduleGrid({
                   layout
                   role="row"
                 >
-                  <div className="time-cell" role="rowheader">{time}</div>
+                  <div className="time-cell" role="rowheader">
+                    {time}
+                  </div>
                   {DAYS.map((day) => (
                     <div
                       key={`personal-${day}-${time}`}
