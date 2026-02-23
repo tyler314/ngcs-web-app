@@ -61,11 +61,6 @@ export default function InstructorCard({ instructor }) {
   const MAX_VISIBLE_ACHIEVEMENTS = 2;
   const hiddenCount = bioAchievements.length - MAX_VISIBLE_ACHIEVEMENTS;
 
-  // When collapsed we show the first 2; when expanded we show all
-  const visibleAchievements = expandAchievements
-    ? bioAchievements
-    : bioAchievements.slice(0, MAX_VISIBLE_ACHIEVEMENTS);
-
   // Extra achievements that only appear when expanded
   const extraAchievements = bioAchievements.slice(MAX_VISIBLE_ACHIEVEMENTS);
 

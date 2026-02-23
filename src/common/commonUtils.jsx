@@ -6,32 +6,88 @@ import {
   IMAGE_API,
   PROGRAMS_API,
   INSTRUCTORS_API,
+  CONTACT_INFO_API,
   S3_INSTRUCTORS_BUCKET_URL,
   DEFAULT_INSTRUCTOR_IMAGE,
 } from "./constants";
-import { useContactInfo } from "./useContactInfo";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PhoneOutlinedIcon from "@mui/icons-material/PhoneOutlined";
 import Stack from "@mui/material/Stack";
 
-// ==================== CACHED HOOKS ====================
+// ==================== CACHE MANAGEMENT ====================
 
-// Simple in-memory cache for programs
-let cachedPrograms = null;
+/**
+ * Simple cache management system with optional TTL (Time To Live)
+ * Set CACHE_TTL to null to disable expiration
+ */
+const CACHE_CONFIG = {
+  // Programs change maybe once a season or year
+  PROGRAMS: { ttl: 1000 * 60 * 60 * 24 },    // 24 hours
+
+  // Images/Instructors rarely change. Use a long TTL (1 week).
+  IMAGES: { ttl: 1000 * 60 * 60 * 24 * 7 }, // 7 days
+  INSTRUCTORS: { ttl: 1000 * 60 * 60 * 24 * 7 }, // 7 days
+
+  // Contact info is the most static thing on the site
+  CONTACT_INFO: { ttl: 1000 * 60 * 60 * 24 * 30 }, // 30 days
+};
+
+class CacheManager {
+  constructor() {
+    this.cache = new Map();
+  }
+
+  set(key, value, ttl = null) {
+    const expiresAt = ttl ? Date.now() + ttl : null;
+    this.cache.set(key, { value, expiresAt });
+  }
+
+  get(key) {
+    const item = this.cache.get(key);
+    if (!item) return null;
+
+    // Check if cache has expired
+    if (item.expiresAt && Date.now() > item.expiresAt) {
+      this.cache.delete(key);
+      return null;
+    }
+
+    return item.value;
+  }
+
+  has(key) {
+    return this.get(key) !== null;
+  }
+
+  clear(key) {
+    this.cache.delete(key);
+  }
+
+  clearAll() {
+    this.cache.clear();
+  }
+}
+
+const cacheManager = new CacheManager();
+
+// ==================== CACHED HOOKS ====================
 
 /**
  * Custom hook to fetch and cache programs data
  */
 function usePrograms() {
-  const [programs, setPrograms] = useState(cachedPrograms || []);
-  const [loading, setLoading] = useState(!cachedPrograms);
+  const [programs, setPrograms] = useState(() =>
+    cacheManager.get("programs") || []
+  );
+  const [loading, setLoading] = useState(!cacheManager.has("programs"));
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (cachedPrograms) {
-      setPrograms(cachedPrograms);
+    // Return cached data if available
+    if (cacheManager.has("programs")) {
+      setPrograms(cacheManager.get("programs"));
       setLoading(false);
       return;
     }
@@ -49,7 +105,8 @@ function usePrograms() {
         const data = await res.json();
 
         if (isMounted) {
-          cachedPrograms = data;
+          // Cache the data
+          cacheManager.set("programs", data, CACHE_CONFIG.PROGRAMS.ttl);
           setPrograms(data);
         }
       } catch (e) {
@@ -75,20 +132,20 @@ function usePrograms() {
   return { programs, loading, error };
 }
 
-// Simple in-memory cache for instructors
-let cachedInstructors = null;
-
 /**
  * Custom hook to fetch and cache instructors data
  */
 function useInstructors() {
-  const [instructors, setInstructors] = useState(cachedInstructors || []);
-  const [loading, setLoading] = useState(!cachedInstructors);
+  const [instructors, setInstructors] = useState(() =>
+    cacheManager.get("instructors") || []
+  );
+  const [loading, setLoading] = useState(!cacheManager.has("instructors"));
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (cachedInstructors) {
-      setInstructors(cachedInstructors);
+    // Return cached data if available
+    if (cacheManager.has("instructors")) {
+      setInstructors(cacheManager.get("instructors"));
       setLoading(false);
       return;
     }
@@ -111,7 +168,12 @@ function useInstructors() {
         const normalized = list.map(normalizeInstructor).filter(Boolean);
 
         if (isMounted) {
-          cachedInstructors = normalized;
+          // Cache the normalized data
+          cacheManager.set(
+            "instructors",
+            normalized,
+            CACHE_CONFIG.INSTRUCTORS.ttl
+          );
           setInstructors(normalized);
         }
       } catch (e) {
@@ -137,40 +199,20 @@ function useInstructors() {
   return { instructors, loading, error };
 }
 
-// Helper function to normalize instructor data
-function normalizeInstructor(item) {
-  if (!item || typeof item !== "object") return null;
-
-  const id = item.id || Math.random().toString(36).substr(2, 9);
-  const name = item.name ?? "Unnamed";
-  const role = item.role ?? "Coach";
-  const bio = item.bio ?? "";
-  const imgSrc = item.imgSrc
-    ? `${S3_INSTRUCTORS_BUCKET_URL}${item.imgSrc}`
-    : `${S3_INSTRUCTORS_BUCKET_URL}${DEFAULT_INSTRUCTOR_IMAGE}`;
-
-  let disciplines = item.disciplines ?? "";
-  if (Array.isArray(disciplines)) {
-    disciplines = disciplines.join(",");
-  }
-
-  return { id, name, role, bio, imgSrc, disciplines };
-}
-
-// Simple in-memory cache for images
-let cachedImages = null;
-
 /**
  * Custom hook to fetch and cache images
  */
 function useImages() {
-  const [images, setImages] = useState(cachedImages || []);
-  const [loading, setLoading] = useState(!cachedImages);
+  const [images, setImages] = useState(() =>
+    cacheManager.get("images") || []
+  );
+  const [loading, setLoading] = useState(!cacheManager.has("images"));
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (cachedImages) {
-      setImages(cachedImages);
+    // Return cached data if available
+    if (cacheManager.has("images")) {
+      setImages(cacheManager.get("images"));
       setLoading(false);
       return;
     }
@@ -189,7 +231,8 @@ function useImages() {
         const parsed = typeof data === "string" ? JSON.parse(data) : data;
 
         if (isMounted) {
-          cachedImages = parsed;
+          // Cache the parsed data
+          cacheManager.set("images", parsed, CACHE_CONFIG.IMAGES.ttl);
           setImages(parsed);
         }
       } catch (e) {
@@ -213,6 +256,89 @@ function useImages() {
   }, []);
 
   return { images, loading, error };
+}
+
+/**
+ * Custom hook to fetch and cache contact info
+ */
+function useContactInfo() {
+  const [contactInfo, setContactInfo] = useState(() =>
+    cacheManager.get("contactInfo") || null
+  );
+  const [loading, setLoading] = useState(!cacheManager.has("contactInfo"));
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Return cached data if available
+    if (cacheManager.has("contactInfo")) {
+      setContactInfo(cacheManager.get("contactInfo"));
+      setLoading(false);
+      return;
+    }
+
+    let isMounted = true;
+
+    async function loadContactInfo() {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const res = await fetch(CONTACT_INFO_API);
+        if (!res.ok)
+          throw new Error(`Failed to fetch contact info: ${res.status}`);
+
+        const data = await res.json();
+
+        if (isMounted) {
+          // Cache the data
+          cacheManager.set(
+            "contactInfo",
+            data,
+            CACHE_CONFIG.CONTACT_INFO.ttl
+          );
+          setContactInfo(data);
+        }
+      } catch (e) {
+        console.error("Failed to load contact info:", e);
+        if (isMounted) {
+          setError(e.message);
+          setContactInfo(null);
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadContactInfo();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  return { contactInfo, loading, error };
+}
+
+// Helper function to normalize instructor data
+function normalizeInstructor(item) {
+  if (!item || typeof item !== "object") return null;
+
+  const id = item.id || Math.random().toString(36).substr(2, 9);
+  const name = item.name ?? "Unnamed";
+  const role = item.role ?? "Coach";
+  const bio = item.bio ?? "";
+  const imgSrc = item.imgSrc
+    ? `${S3_INSTRUCTORS_BUCKET_URL}${item.imgSrc}`
+    : `${S3_INSTRUCTORS_BUCKET_URL}${DEFAULT_INSTRUCTOR_IMAGE}`;
+
+  let disciplines = item.disciplines ?? "";
+  if (Array.isArray(disciplines)) {
+    disciplines = disciplines.join(",");
+  }
+
+  return { id, name, role, bio, imgSrc, disciplines };
 }
 
 // ==================== COMPONENTS ====================
@@ -427,4 +553,5 @@ export {
   parseTime,
   generateClassId,
   useCurrentDayIndex,
+  cacheManager, // Export cache manager for manual cache clearing if needed
 };
