@@ -4,11 +4,10 @@ import { PersonalScheduleGrid } from "./PersonalScheduleGrid";
 import { PersonalScheduleAccordionView } from "./PersonalScheduleAccordionView";
 import { ScheduleGridView } from "./ScheduleGridView";
 import { ScheduleAccordionView } from "./ScheduleAccordionView";
-import { PROGRAMS_API } from "../../common/constants";
 import ViewWeekIcon from "@mui/icons-material/ViewWeek";
 import ViewAgendaIcon from "@mui/icons-material/ViewAgenda";
 import "./Schedule.css";
-import { parseTime, generateClassId } from "../../common/commonUtils";
+import { parseTime, generateClassId, usePrograms } from "../../common/commonUtils";
 
 const PROGRAM_COLORS = {
   bjj: { bg: "#3b82f6", light: "#60a5fa" },
@@ -19,9 +18,8 @@ const PROGRAM_COLORS = {
 };
 
 function ScheduleCalendar() {
-  const [programs, setPrograms] = useState([]);
+  const { programs, loading } = usePrograms();
   const [selectedPrograms, setSelectedPrograms] = useState(new Set());
-  const [loading, setLoading] = useState(true);
   const [expandedClass, setExpandedClass] = useState(null);
   const [personalSchedule, setPersonalSchedule] = useState(() => {
     const saved = localStorage.getItem("personalSchedule");
@@ -113,21 +111,15 @@ function ScheduleCalendar() {
     return dayOrder.filter((day) => allDays.has(day));
   }, [programs]);
 
+  // Seed the filter when programs first load
   useEffect(() => {
-    const fetchPrograms = async () => {
-      try {
-        const response = await fetch(PROGRAMS_API);
-        const data = await response.json();
-        setPrograms(data);
-        setSelectedPrograms(new Set(data.map((p) => p.id)));
-      } catch (error) {
-        console.error("Error fetching programs:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPrograms();
-  }, []);
+    if (programs.length > 0) {
+      setSelectedPrograms((prev) =>
+        prev.size === 0 ? new Set(programs.map((p) => p.id)) : prev
+      );
+    }
+  }, [programs]);
+
 
   const toggleProgram = (programId) => {
     const newSelected = new Set(selectedPrograms);

@@ -85,12 +85,8 @@ function usePrograms() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Return cached data if available
-    if (cacheManager.has("programs")) {
-      setPrograms(cacheManager.get("programs"));
-      setLoading(false);
-      return;
-    }
+    // State already initialized from cache in useState — no need to set again
+    if (cacheManager.has("programs")) return;
 
     let isMounted = true;
 
@@ -143,12 +139,8 @@ function useInstructors() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Return cached data if available
-    if (cacheManager.has("instructors")) {
-      setInstructors(cacheManager.get("instructors"));
-      setLoading(false);
-      return;
-    }
+    // State already initialized from cache in useState — no need to set again
+    if (cacheManager.has("instructors")) return;
 
     let isMounted = true;
 
@@ -210,12 +202,8 @@ function useImages() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Return cached data if available
-    if (cacheManager.has("images")) {
-      setImages(cacheManager.get("images"));
-      setLoading(false);
-      return;
-    }
+    // State already initialized from cache in useState — no need to set again
+    if (cacheManager.has("images")) return;
 
     let isMounted = true;
 

@@ -37,16 +37,13 @@ export function useContactInfo() {
   const [contactInfo, setContactInfo] = useState(
     cachedContactInfo || DEFAULT_CONTACT_INFO,
   );
-  const [loading, setLoading] = useState(!cachedContactInfo);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     // If already cached, no need to fetch
-    if (cachedContactInfo) {
-      setContactInfo(cachedContactInfo);
-      setLoading(false);
-      return;
-    }
+    // State already initialized from cachedContactInfo or defaults in useState — no need to set again
+    if (cachedContactInfo) return;
 
     let isMounted = true;
 
