@@ -33,9 +33,9 @@ export function ClassCard({
       whileHover={
         !isExpanded
           ? {
-              scale: 1.02,
-              boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-            }
+            scale: 1.02,
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+          }
           : {}
       }
       onClick={onClick}
@@ -76,16 +76,6 @@ export function ClassCard({
               transition={{ delay: 0.15 }}
               className="expanded-info"
             >
-              <div className="expanded-row">
-                <span className="expanded-label">Day:</span>
-                <span>{classItem.day}</span>
-              </div>
-
-              <div className="expanded-row">
-                <span className="expanded-label">Time:</span>
-                <span>{classItem.time}</span>
-              </div>
-
               {classItem.note && (
                 <motion.div
                   className="expanded-note"
@@ -95,6 +85,18 @@ export function ClassCard({
                 >
                   <InfoIcon sx={{ fontSize: 18 }} className="note-icon" />
                   <span>{classItem.note}</span>
+                </motion.div>
+              )}
+
+              {classItem.coach && (
+                <motion.div
+                  className="expanded-row"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 }}
+                >
+                  <span className="expanded-label">Coach:</span>
+                  <span>{classItem.coach}</span>
                 </motion.div>
               )}
 

@@ -28,14 +28,13 @@ export default function PillSchedule({ scheduleEntries }) {
                 (session, sIdx) =>
                   session &&
                   session.day &&
-                  session.times && (
+                  session.time && (
                     <div key={sIdx} className="time-pill">
                       <div className="time-pill-day">{session.day}</div>
-                      <div className="time-pill-time">
-                        {Array.isArray(session.times)
-                          ? session.times.join(", ")
-                          : session.times}
-                      </div>
+                      <div className="time-pill-time">{session.time}</div>
+                      {session.coach && (
+                        <div className="time-pill-coach">{session.coach}</div>
+                      )}
                     </div>
                   ),
               )}

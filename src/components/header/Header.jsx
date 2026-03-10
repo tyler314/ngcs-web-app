@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Header.css";
 import { Menu, IconButton, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -12,22 +12,26 @@ import {
 } from "../../common/commonUtils";
 import { navTabsData } from "../../common/constants";
 
-function NavigationTabs(props) {
+function NavigationTabs({ className, isHeader, onHomeClick }) {
   const { isMobile } = useIsMobile();
   const { isTablet } = useIsTablet();
 
   const navTabs = navTabsData.map((tab) => ({
     ...tab,
     className:
-      tab.isSpecial && props.isHeader
-        ? `${props.className}-with-box`
-        : props.className,
+      tab.isSpecial && isHeader
+        ? `${className}-with-box`
+        : className,
   }));
 
   return isMobile || isTablet ? (
     navTabs.map((item, index) => (
       <MenuItem key={index} className={item.className}>
-        <NavLink to={item.path} exact>
+        <NavLink
+          to={item.path}
+          exact
+          onClick={item.path === "/" ? onHomeClick : undefined}
+        >
           {item.label}
         </NavLink>
       </MenuItem>
@@ -36,7 +40,12 @@ function NavigationTabs(props) {
     <ul>
       {navTabs.map((item, index) => (
         <li key={index}>
-          <NavLink to={item.path} exact className={item.className}>
+          <NavLink
+            to={item.path}
+            exact
+            className={item.className}
+            onClick={item.path === "/" ? onHomeClick : undefined}
+          >
             {item.label}
           </NavLink>
         </li>
@@ -45,12 +54,16 @@ function NavigationTabs(props) {
   );
 }
 
-function NGLogo({ isHomePage }) {
+function NGLogo({ spinKey, onHomeClick }) {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
   return (
     <div className="ng-logo-header">
-      <NavLink to="/" end>
-        {isHomePage ? (
+      <NavLink to="/" end onClick={onHomeClick}>
+        {isHome ? (
           <motion.img
+            key={spinKey}
             src="/nglogo192.png"
             alt="Neutral Ground logo"
             width={70}
@@ -109,16 +122,16 @@ function Banner() {
   );
 }
 
-function DesktopHeader() {
+function DesktopHeader({ onHomeClick }) {
   return (
     <div className="desktop-header">
-      <NavigationTabs className="desktop-tab" isHeader={true} />
+      <NavigationTabs className="desktop-tab" isHeader={true} onHomeClick={onHomeClick} />
     </div>
   );
 }
 
 // MOBILE
-function MobileHeader() {
+function MobileHeader({ onHomeClick }) {
   return (
     <div className="mobile-header">
       <ul>
@@ -126,7 +139,7 @@ function MobileHeader() {
           <MobileTitle />
         </li>
         <li>
-          <HamburgerDropDown />
+          <HamburgerDropDown onHomeClick={onHomeClick} />
         </li>
       </ul>
     </div>
@@ -154,7 +167,7 @@ function MobileTitle() {
   );
 }
 
-function HamburgerDropDown() {
+function HamburgerDropDown({ onHomeClick }) {
   const [anchor, setAnchor] = useState(null);
 
   const openMenu = (event) => {
@@ -177,23 +190,26 @@ function HamburgerDropDown() {
         onClose={closeMenu}
         keepMounted
       >
-        <NavigationTabs className="mobile-tab" />
+        <NavigationTabs className="mobile-tab" onHomeClick={onHomeClick} />
       </Menu>
     </div>
   );
 }
 
 // MAIN
-export default function Header({ isHomePage = false }) {
+export default function Header() {
+  const [spinKey, setSpinKey] = useState(0);
+  const onHomeClick = () => setSpinKey((k) => k + 1);
+
   return (
     <nav>
       <div className="banner">
         <Banner />
       </div>
       <div className="header">
-        <NGLogo isHomePage={isHomePage} />
-        <MobileHeader />
-        <DesktopHeader />
+        <NGLogo spinKey={spinKey} onHomeClick={onHomeClick} />
+        <MobileHeader onHomeClick={onHomeClick} />
+        <DesktopHeader onHomeClick={onHomeClick} />
       </div>
       <div className="lower-banner" />
     </nav>

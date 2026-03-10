@@ -15,6 +15,7 @@ const PROGRAM_COLORS = {
   striking: { bg: "#ef4444", light: "#f87171" },
   "kids-bjj": { bg: "#10b981", light: "#34d399" },
   mma: { bg: "#8b5cf6", light: "#a78bfa" },
+  default: { bg: "#6b7280", light: "#9ca3af" },
 };
 
 function ScheduleCalendar() {
@@ -74,7 +75,7 @@ function ScheduleCalendar() {
         Object.entries(scheduleGroup).forEach(([key, sessions]) => {
           if (key === "description") return;
           sessions.forEach((session) => {
-            session.times.forEach((time) => allTimes.add(time));
+            if (session.time) allTimes.add(session.time);
           });
         });
       });
@@ -197,20 +198,20 @@ function ScheduleCalendar() {
 
             const sessions = levelData;
             sessions.forEach((session) => {
-              session.times.forEach((time) => {
-                if (grid[session.day] && grid[session.day][time]) {
-                  grid[session.day][time].push({
-                    program: program.name,
-                    programId: program.id,
-                    type: scheduleType,
-                    level: levelKey,
-                    color: PROGRAM_COLORS[program.id],
-                    day: session.day,
-                    time: time,
-                    note: session.note || null,
-                  });
-                }
-              });
+              const time = session.time;
+              if (grid[session.day] && grid[session.day][time]) {
+                grid[session.day][time].push({
+                  program: program.name,
+                  programId: program.id,
+                  type: scheduleType,
+                  level: levelKey,
+                  color: PROGRAM_COLORS[program.id] ?? PROGRAM_COLORS.default,
+                  day: session.day,
+                  time: time,
+                  note: session.note || null,
+                  coach: session.coach || null,
+                });
+              }
             });
           });
         },
@@ -305,12 +306,12 @@ function ScheduleCalendar() {
               onClick={() => toggleProgram(program.id)}
               style={{
                 backgroundColor: selectedPrograms.has(program.id)
-                  ? PROGRAM_COLORS[program.id].bg
+                  ? (PROGRAM_COLORS[program.id] ?? PROGRAM_COLORS.default).bg
                   : "transparent",
-                borderColor: PROGRAM_COLORS[program.id].bg,
+                borderColor: (PROGRAM_COLORS[program.id] ?? PROGRAM_COLORS.default).bg,
                 color: selectedPrograms.has(program.id)
                   ? "white"
-                  : PROGRAM_COLORS[program.id].bg,
+                  : (PROGRAM_COLORS[program.id] ?? PROGRAM_COLORS.default).bg,
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

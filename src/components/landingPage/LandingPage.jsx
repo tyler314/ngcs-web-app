@@ -52,7 +52,7 @@ function GoogleEmbedMap() {
 export default function LandingPage() {
   return (
     <div className="landing-page-wrapper">
-      <Header isHomePage={true} />
+      <Header />
       <SEO
         title="Neutral Ground Combat Sports | MMA, BJJ, Kickboxing & Boxing in West Bend, WI"
       />

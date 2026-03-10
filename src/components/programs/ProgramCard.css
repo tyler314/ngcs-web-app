@@ -641,6 +641,13 @@
   opacity: 0.9;
 }
 
+.session-coach {
+  font-family: "MicroFLF", sans-serif;
+  font-size: 0.85rem;
+  font-style: italic;
+  opacity: 0.7;
+}
+
 /* DESIGN 3: Pill-based mini-sections (Kids BJJ) */
 .schedule-pills-container {
   display: flex;
@@ -718,6 +725,14 @@
 .time-pill-time {
   font-family: "MicroFLF", sans-serif;
   font-size: 1rem;
+}
+
+.time-pill-coach {
+  font-family: "MicroFLF", sans-serif;
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-top: 0.3rem;
+  opacity: 0.7;
 }
 
 /* DESIGN 4: Simple list (MMA) */

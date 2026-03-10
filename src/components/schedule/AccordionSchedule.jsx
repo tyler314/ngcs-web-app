@@ -56,10 +56,14 @@ export default function AccordionSchedule({
                             <span className="session-day">{session.day}</span>
                             <span className="session-divider">•</span>
                             <span className="session-time">
-                              {Array.isArray(session.times)
-                                ? session.times.join(", ")
-                                : session.times}
+                              {session.time}
                             </span>
+                            {session.coach && (
+                              <>
+                                <span className="session-divider">•</span>
+                                <span className="session-coach">{session.coach}</span>
+                              </>
+                            )}
                           </div>
                         ))}
                       </div>
