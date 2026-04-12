@@ -1,9 +1,9 @@
 @font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-display: swap;
   font-family: "MicroFLF";
   font-style: normal;
   font-weight: 400;
-  src: url("/src/fonts/microflf.ttf") format("ttf"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url("/src/fonts/microflf.ttf") format("ttf");
 }
 
 .social-nav-link {
@@ -22,6 +22,7 @@
 .header-phone-number {
   font-family: "MicroFLF", serif;
 }
+
 a[href^="tel"] {
   text-decoration: none;
   color: inherit;
@@ -57,12 +58,14 @@ a[href^="tel"] {
   }
 }
 
+/* Base grid — mobile first */
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 1rem;
   padding: 1rem;
 }
+
 .photo-item img {
   width: 100%;
   height: auto;
@@ -77,13 +80,16 @@ a[href^="tel"] {
   gap: 2rem;
 }
 
+/* Mobile overrides */
 .photo-grid.mobile {
   gap: 0.5rem;
   padding: 0.5rem;
 }
 
+/* Desktop — medium size, fills width comfortably */
 .photo-grid.desktop {
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.1rem;
   padding: 1rem;
 }
 
@@ -120,12 +126,10 @@ a[href^="tel"] {
   left: 0;
 }
 
-/* Optional: Add this if you want to prevent the default button outline */
 .photo-grid-toggle-button:focus {
   outline: none;
 }
 
-/* Optional: Add this if you want to maintain accessibility */
 .photo-grid-toggle-button:focus-visible {
   outline: 2px solid #333;
   outline-offset: 4px;
