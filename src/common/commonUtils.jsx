@@ -1,6 +1,6 @@
 import "./commonUtils.css";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import {
   IMAGE_API,
@@ -423,7 +423,9 @@ function PhotoGrid() {
   const [shuffledImages, setShuffledImages] = useState([]);
   const [showAll, setShowAll] = useState(false);
   const { isMobile } = useIsMobile();
+  const navigate = useNavigate();
   const MAX_VISIBLE_IMAGES = isMobile ? 6 : 9;
+  const MAX_EXPANDED_IMAGES = isMobile ? 12 : 18;
 
   // Shuffle images once when they load
   useEffect(() => {
@@ -437,7 +439,7 @@ function PhotoGrid() {
   }, [images]);
 
   const displayedImages = showAll
-    ? shuffledImages
+    ? shuffledImages.slice(0, MAX_EXPANDED_IMAGES)
     : shuffledImages.slice(0, MAX_VISIBLE_IMAGES);
 
   return (
@@ -465,6 +467,14 @@ function PhotoGrid() {
           onClick={() => setShowAll((prev) => !prev)}
         >
           {showAll ? "Show Less" : "Show More"}
+        </button>
+      )}
+      {showAll && (
+        <button
+          className="photo-grid-toggle-button"
+          onClick={() => navigate("/gallery")}
+        >
+          Gallery
         </button>
       )}
     </div>
