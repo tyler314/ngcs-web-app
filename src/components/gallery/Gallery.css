@@ -137,6 +137,32 @@
   cursor: pointer;
 }
 
+/* Masonry column layout for gallery page */
+.gallery-container .photo-grid {
+  display: block;
+}
+
+.gallery-container .photo-grid.desktop {
+  columns: 4;
+  column-gap: 1rem;
+}
+
+.gallery-container .photo-grid.mobile {
+  columns: 2;
+  column-gap: 0.5rem;
+}
+
+.gallery-container .photo-item {
+  break-inside: avoid;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+  .gallery-container .photo-grid.desktop {
+    columns: 3;
+  }
+}
+
 /* Mobile lightbox adjustments */
 @media (max-width: 768px) {
   .gallery-lightbox-backdrop {

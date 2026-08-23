@@ -21,6 +21,47 @@ export default function Gallery() {
       .map(({ value }) => value);
   }, [images]);
 
+  // Load natural aspect ratios for each image
+  const [imageDims, setImageDims] = useState({});
+  useEffect(() => {
+    if (shuffledImages.length === 0) return;
+    const dims = {};
+    let remaining = shuffledImages.length;
+    shuffledImages.forEach((src) => {
+      const img = new window.Image();
+      const finish = () => {
+        if (--remaining === 0) setImageDims({ ...dims });
+      };
+      img.onload = () => {
+        dims[src] = img.naturalWidth / img.naturalHeight;
+        finish();
+      };
+      img.onerror = () => {
+        dims[src] = 1;
+        finish();
+      };
+      img.src = src;
+    });
+  }, [shuffledImages]);
+
+  // Interleave landscape (≥1.2) and portrait (<1.2) once all dims are known
+  const displayImages = useMemo(() => {
+    const allLoaded =
+      shuffledImages.length > 0 &&
+      Object.keys(imageDims).length >= shuffledImages.length;
+    if (!allLoaded) return shuffledImages;
+
+    const landscape = shuffledImages.filter((src) => (imageDims[src] || 1) >= 1.2);
+    const portrait = shuffledImages.filter((src) => (imageDims[src] || 1) < 1.2);
+    const result = [];
+    const maxLen = Math.max(landscape.length, portrait.length);
+    for (let i = 0; i < maxLen; i++) {
+      if (i < landscape.length) result.push(landscape[i]);
+      if (i < portrait.length) result.push(portrait[i]);
+    }
+    return result;
+  }, [shuffledImages, imageDims]);
+
   const dismiss = useCallback(() => {
     setSelectedIndex(null);
     setDirection(0);
@@ -29,14 +70,14 @@ export default function Gallery() {
   const goNext = useCallback(() => {
     if (selectedIndex === null) return;
     setDirection(1);
-    setSelectedIndex((i) => (i + 1) % shuffledImages.length);
-  }, [selectedIndex, shuffledImages.length]);
+    setSelectedIndex((i) => (i + 1) % displayImages.length);
+  }, [selectedIndex, displayImages.length]);
 
   const goPrev = useCallback(() => {
     if (selectedIndex === null) return;
     setDirection(-1);
-    setSelectedIndex((i) => (i - 1 + shuffledImages.length) % shuffledImages.length);
-  }, [selectedIndex, shuffledImages.length]);
+    setSelectedIndex((i) => (i - 1 + displayImages.length) % displayImages.length);
+  }, [selectedIndex, displayImages.length]);
 
   // Keyboard: Escape to close, arrow keys to navigate
   useEffect(() => {
@@ -94,7 +135,7 @@ export default function Gallery() {
           </motion.p>
         </motion.div>
         <div className={`photo-grid ${isMobile ? "mobile" : "desktop"}`}>
-          {shuffledImages.map((src, index) => (
+          {displayImages.map((src, index) => (
             <motion.div
               className="photo-item"
               key={index}
@@ -150,7 +191,7 @@ export default function Gallery() {
               <motion.img
                 key={selectedIndex}
                 className="gallery-lightbox-image"
-                src={shuffledImages[selectedIndex]}
+                src={displayImages[selectedIndex]}
                 alt="Enlarged gallery photo"
                 custom={direction}
                 variants={{
@@ -207,7 +248,7 @@ export default function Gallery() {
               className="gallery-lightbox-counter"
               onClick={(e) => e.stopPropagation()}
             >
-              {selectedIndex + 1} / {shuffledImages.length}
+              {selectedIndex + 1} / {displayImages.length}
             </div>
           </motion.div>
         )}
